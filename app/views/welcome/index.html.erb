@@ -1,2 +1,7 @@
 <p>Air-Quality-Alert.com</p>
 <h1>What is my air quality?</h1>
+
+<%= form_tag do %>
+  <%= text_field_tag 'zipcode', nil, placeholder: 'Zipcode'  %>
+  <%= submit_tag("Get Air Quality") %>
+<% end %>

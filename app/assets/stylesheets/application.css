@@ -14,7 +14,7 @@
  *= require_self
  */
 
- .top-bar{
+.top-bar{
   background: #265DE0;
   position: absolute;
   top: 0;
@@ -23,12 +23,7 @@
   width: 100%;
   min-height: 102px;
   height: 9.9%;
- }
-
- /*.zip-form {
-   margin-top:200px;
-   z-index: 998;
- }*/
+}
 
 input{
   color: #265DE0;
@@ -53,7 +48,6 @@ input{
   font-family: AvenirNext-DemiBold;
   text-align: center;
 }
-
 ::-moz-placeholder { /* Firefox 19+ */
   color: #265DE0;
 }
@@ -73,7 +67,7 @@ input:focus {
   color: #265de0;
 }
 
- #contact-form {
+#zipcode-form {
   position: relative;
   z-index: 4;
   width: 45%;
@@ -84,31 +78,30 @@ input:focus {
   height: 150px;
   text-align: center;
   opacity: .9;
- }
+}
 
- #submit-button {
-   margin-top: 5%;
-   padding: 10px 10px 10px 10px;
+#submit-button {
+  margin-top: 5%;
+  padding: 10px 10px 10px 10px;
   background-color: #265de0;
   border: none;
   color: white;
   font-family: AvenirNext-Medium;
   font-size: 1.5em;
   border-radius: 19px;
-
 }
 
- #map-background {
-   height: 100%;
-   width: 100%;
-   position:absolute;
-   top: 0;
-   left: 0;
+#map-background {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0;
+  left: 0;
   z-index: 0;
   frameborder:0;
- }
+}
 
- #header-question {
+#header-question {
   font-family: Shrikhand-Regular;
   font-size: 2.5em;
   color: #FFFFFF;
@@ -117,9 +110,9 @@ input:focus {
   margin-top: 0px;
   line-height: 90%;
   padding-left:35px;
- }
+}
 
- #logo {
+#logo {
   font-family: AvenirNext-DemiBold;
   font-size: .5em;
   color: #FFFFFF;
@@ -127,4 +120,4 @@ input:focus {
   margin:0px;
   margin-top: 20px;
   padding-left:37px;
- }
+}

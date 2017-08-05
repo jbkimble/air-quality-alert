@@ -4,12 +4,20 @@ class AirqualityController < ApplicationController
 
   def create
     uri = URI.parse("https://maps.googleapis.com/maps/api/geocode/json?address=#{params["zipcode"]}&key=#{ENV["google_key"]}")
-    # next steps are to hide the key and then to commit
     response = Net::HTTP.get(uri)
     lat_lng = JSON.parse(response, symbolize_names: true)[:results][0][:geometry][:location]
-    binding.pry
+    lattitude = lat_lng[:lat]
+    longitude = lat_lng[:lng]
 
-    # redirect_to airquality_index_path
+    uri = URI.parse("http://api.airvisual.com//v2/nearest_city?key=#{ENV["av_key"]}&lat=#{lattitude}&lon=#{longitude}")
+    response = Net::HTTP.get(uri)
+    air_quality_data = JSON.parse(response, symbolize_names: true)
+    us_aqi = air_quality_data[:data][:current][:pollution][:aqius]
+    city_name = air_quality_data[:data][:city]
+    state_name = air_quality_data[:data][:state]
+    country_name = air_quality_data[:data][:country]
+
+    redirect_to airquality_index_path
   end
 
   # 1. Person enters valid zipcode into text field

@@ -5,7 +5,7 @@ class CreateWeatherPoints < ActiveRecord::Migration[5.0]
       t.string :state
       t.string :country
       t.integer :zipcode
-      t.string :airquality
+      t.string :aqi
       t.string :rating
 
       t.timestamps null: false

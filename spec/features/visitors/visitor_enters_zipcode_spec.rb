@@ -1,9 +1,9 @@
-require 'rails helper'
+require 'rails_helper'
 
 describe 'as a visitor' do
-  scenarion 'When I enter a valid zipcode I see data about that zipcode' do
+  scenario 'When I enter a valid zipcode I see data about that zipcode' do
     visit root_path
-    fill_in 'zipcode', with: "98006"
+    fill_in 'zipcode', with: "98372"
     find_button('Get Air Quality').click
 
     expect(current_path).to eq(air_quality_path)

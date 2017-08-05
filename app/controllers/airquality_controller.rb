@@ -16,8 +16,12 @@ class AirqualityController < ApplicationController
     city_name = air_quality_data[:data][:city]
     state_name = air_quality_data[:data][:state]
     country_name = air_quality_data[:data][:country]
-
-    redirect_to airquality_index_path
+    WeatherPoint.new(city: city_name, state: state_name, country: country_name,
+                    zipcode: params["zipcode"], aqi: us_aqi, rating:"good")
+    #add 'get_rating method which takes aqi and return us government text rating'
+    #build weatherpoint object
+    #redirect to that objects show page and display information
+    redirect_to airquality_path
   end
 
   # 1. Person enters valid zipcode into text field

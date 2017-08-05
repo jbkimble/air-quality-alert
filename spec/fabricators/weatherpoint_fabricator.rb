@@ -3,6 +3,6 @@ Fabricator(:weatherPoint) do
   state Faker::Address.state
   country Faker::Address.country
   zipcode Faker::Address.zip_code
-  airquality Faker::Number.between(1, 200)
+  aqi Faker::Number.between(1, 200)
   rating Faker::Number.digit
 end

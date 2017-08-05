@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170805162908) do
     t.string   "state"
     t.string   "country"
     t.integer  "zipcode"
-    t.string   "airquality"
+    t.string   "aqi"
     t.string   "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

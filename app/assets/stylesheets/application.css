@@ -15,14 +15,28 @@
  */
 
  .top-bar{
-   background: #265DE0;
-   position: fixed;
+  background: #265DE0;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
   width: 100%;
   min-height: 102px;
   height: 9.9%;
+ }
+
+ .zip-form {
+   margin-top:200px;
+ }
+
+ #map-background {
+   height: 100%;
+   width: 100%;
+   position:absolute;
+   top: 0;
+   left: 0;
+  z-index: 0;
+  frameborder:0;
  }
 
  #header-question {

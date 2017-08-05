@@ -1,7 +1,11 @@
-<p>Air-Quality-Alert.net</p>
-<h1>What is my air quality?</h1>
+<div class="top-bar">
+  <p id="logo">Air-Quality-Alert.net</p>
+  <p id="header-question">What is my air quality?</p>
+</div>
 
 <%= form_tag("/airquality", method: "post") do %>
   <%= text_field_tag 'zipcode', nil, placeholder: 'Zipcode'  %>
   <%= submit_tag("Get Air Quality") %>
 <% end %>
+
+<p> hi <br> <span id="logo"> test </span> </p>

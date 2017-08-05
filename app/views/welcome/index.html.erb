@@ -5,6 +5,12 @@
   <p id="header-question">What is my air quality?</p>
 </div>
 
+<div id="contact-form">
+  <%= form_tag("/airquality", method: "post") do %>
+    <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'" %> <br>
+    <%= submit_tag "Get Air Quality", id:'submit-button' %>
+  <% end %>
+</div>
 
 <div class="zip-form">
   <%= form_tag("/airquality", method: "post") do %>
@@ -16,14 +22,22 @@
 <script>
 
   function initMap() {
+
     var uluru = {lat: 47.6062, lng: -122.3321};
     var map = new google.maps.Map(document.getElementById('map-background'), {
-      zoom: 11,
+      zoom: 10,
       center: uluru,
       streetViewControl: false,
       scaleControl: false,
-      draggable: false
+      draggable: false,
+      zoomControl: false
     });
+  }
+
+  function manageBlur() {
+    document.getElementById("zipcode-input").placeholder = 'Enter Zipcode';
+
+
   }
 </script>
 <script async defer

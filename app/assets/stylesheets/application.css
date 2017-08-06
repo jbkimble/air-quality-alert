@@ -14,6 +14,25 @@
  *= require_self
  */
 
+ .results-box {
+   background-color: pink;
+   height: 60%;
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   left:0 ;
+ }
+
+ /*.close {
+   height: 50%;
+   width: 100%;
+   position:absolute;
+   top: 0;
+   left: 0;
+   z-index: 0;
+   frameborder:0;
+ }*/
+
 .top-bar{
   background: #265DE0;
   position: absolute;
@@ -25,9 +44,21 @@
   height: 9.9%;
 }
 
-input{
-  color: #265DE0;
-  font-size: 2.2em;
+#zipcode-form {
+  position: relative;
+  z-index: 4;
+  width: 45%;
+  margin-top: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  height: 150px;
+  text-align: center;
+  opacity: .9;
+  caret-color: #265de0;
+  caret-width: 20px;
+  -webkit-transition: width 1s;
+
 }
 
 #zipcode-input {
@@ -40,6 +71,20 @@ input{
   text-align: center;
   font-family: AvenirNext-DemiBold;
   letter-spacing: 1px;
+  -webkit-transition: margin-left 1s;
+}
+
+#submit-button {
+  margin-top: 5%;
+  padding: 10px 10px 10px 10px;
+  background-color: #265de0;
+  border: none;
+  color: white;
+  font-family: AvenirNext-Medium;
+  font-size: 1.5em;
+  border-radius: 19px;
+  cursor:pointer;
+  -webkit-transition: margin-right 1s;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -58,6 +103,11 @@ input{
   color: #265DE0;
 }
 
+input{
+  color: #265DE0;
+  font-size: 2.2em;
+}
+
 input:focus {
   outline:none;
   font-size: 2.5em;
@@ -65,33 +115,6 @@ input:focus {
   font-family: AvenirNext-DemiBold;
   letter-spacing: 1px;
   color: #265de0;
-}
-
-#zipcode-form {
-  position: relative;
-  z-index: 4;
-  width: 45%;
-  margin-top: 25%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  height: 150px;
-  text-align: center;
-  opacity: .9;
-  caret-color: #265de0;
-  caret-width: 20px;
-}
-
-#submit-button {
-  margin-top: 5%;
-  padding: 10px 10px 10px 10px;
-  background-color: #265de0;
-  border: none;
-  color: white;
-  font-family: AvenirNext-Medium;
-  font-size: 1.5em;
-  border-radius: 19px;
-  cursor:pointer;
 }
 
 #map-background {
@@ -102,6 +125,8 @@ input:focus {
   left: 0;
   z-index: 0;
   frameborder:0;
+  -webkit-transition: height 1s; /* Safari */
+  transition: height 1s;
 }
 
 #header-question {

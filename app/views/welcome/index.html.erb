@@ -1,126 +1,17 @@
-<div id="map-background"></div>
+<aside class="q-question">
+  <h3>Have a question for me?</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis totam distinctio molestiae exercitationem impedit ut libero. Sit accusamus consectetur distinctio nesciunt quae nobis consequatur facere.</p>
+  <form>
+    <textarea name="" font-weight="200" id="" cols="30" rows="7"></textarea>
+  </form>
+</aside>
 
-<div class="top-bar">
-  <p id="logo">Air-Quality-Alert.net</p>
-  <p id="header-question">What is my air quality?</p>
-</div>
+<button class="clickr">Ask A Question</button>
 
-<div id="zipcode-form">
-  <%= form_tag("/airquality", method: "post") do %>
-    <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
-    <%= submit_tag "Get Air Quality", id:'submit-button' %>
-  <% end %>
-</div>
+<script type="text/javascript">
+  $('.q-question').hide();
 
-<script>
-  function initMap() {
-
-    var styledMapType = new google.maps.StyledMapType(
-      [
-{
-"featureType": "administrative.land_parcel",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "administrative.neighborhood",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi.business",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi.park",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road",
-"elementType": "labels",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.arterial",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.highway",
-"elementType": "labels",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.local",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "water",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-}
-],
-        {name: 'Styled Map'});
-
-    var map = new google.maps.Map(document.getElementById('map-background'), {
-      center: {lat: 47.6062, lng: -122.3321},
-      streetViewControl: false,
-      scaleControl: false,
-      draggable: false,
-      zoomControl: false,
-      zoom: 10,
-      mapTypeControlOptions: {
-        mapTypeIds: []
-      }
-    });
-
-    map.mapTypes.set('styled_map', styledMapType);
-    map.setMapTypeId('styled_map');
-  }
-</script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+  $('.clickr').click(function(){
+    $('.q-question').slideToggle();
+  });
 </script>

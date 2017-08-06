@@ -1,9 +1,9 @@
 class AirqualityController < ApplicationController
   def index
+    @weatherpoint = WeatherPoint.last
   end
 
   def show
-    @weatherpoint = WeatherPoint.find(params["id"])
   end
 
   def create

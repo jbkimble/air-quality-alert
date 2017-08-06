@@ -78,6 +78,8 @@ input:focus {
   height: 150px;
   text-align: center;
   opacity: .9;
+  caret-color: #265de0;
+  caret-width: 20px;
 }
 
 #submit-button {
@@ -89,6 +91,7 @@ input:focus {
   font-family: AvenirNext-Medium;
   font-size: 1.5em;
   border-radius: 19px;
+  cursor:pointer;
 }
 
 #map-background {

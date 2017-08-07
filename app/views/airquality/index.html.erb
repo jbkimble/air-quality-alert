@@ -16,14 +16,12 @@
 
 </div> -->
 <aside class="results-box">
-
-  <h1>Air Quality Show Page</h1>
+<div class="result-text">
 
   <h3>The Air Quality in <%= @weatherpoint.city %>,
-    <span> <%= @weatherpoint.country %> </span> is
-    <span><%= @weatherpoint.rating %> </span></h3>
-
-  <%= @weatherpoint.aqi %> <br>
+    <span class="text-emphasis"> <%= @weatherpoint.country %> </span> is
+  <%= @weatherpoint.rating %> <br>
+</div>
 
 </aside>
 
@@ -143,7 +141,7 @@ var map;
     map.setCenter({lat: 47.45, lng: -122.3321});
     $('#map-background').css("height", "40%");
     $('.results-box').slideToggle();
-    $('#zipcode-form').css({"width":"100%","margin-top":"12%","margin-left":"","margin-right":"", "margin-top":"12%", "text-align":""});
+    $('#zipcode-form').css({"width":"100%","margin-top":"5em","margin-left":"","margin-right":"", "text-align":""});
     $('#zipcode-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
     $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
   });

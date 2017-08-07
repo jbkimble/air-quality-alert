@@ -22,12 +22,15 @@ class AirqualityController < ApplicationController
     country_name = air_quality_data[:data][:country]
     wp = WeatherPoint.new(city: city_name, state: state_name, country: country_name,
                     zipcode: params["zipcode"], aqi: us_aqi, rating:WeatherPoint.get_rating(us_aqi))
-
-    if wp.save
-      redirect_to airquality_path(wp.id)
-    else
-      redirect_to root_path
+    wp.save
+    respond_to do |format|
+      format.json { render json: wp.to_json, :status => :ok}
     end
+    # if wp.save
+    #   redirect_to airquality_path(wp.id)
+    # else
+    #   redirect_to root_path
+    # end
 
   end
 

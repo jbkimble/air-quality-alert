@@ -18,7 +18,7 @@
 <aside class="results-box">
 <div class="result-text">
 
-  <p>The Air Quality in  <span id="city-country"> poop </span> is
+  <p>The Air Quality in  <span id="city-country"> </span> is
      <span class="text-emphasis" id="rating"> </span></p>
 
 </div>
@@ -29,7 +29,7 @@
 <script>
 var map;
   function initMap() {
-
+    
     var styledMapType = new google.maps.StyledMapType(
       [
 {
@@ -138,11 +138,21 @@ var map;
   $('.results-box').hide();
 
   $('.top-bar').click(function(){
-    map.setCenter({lat: 47.45, lng: -122.3321});
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
     submitFormData(zipcode);
-
   });
+
+  function recenterMap() {
+    map.setCenter({lat: 47.45, lng: -122.3321});
+  }
+
+  function updatePageStyle() {
+    $('#map-background').css("height", "40%");
+    $('.results-box').slideToggle();
+    $('#zipcode-form').css({"width":"100%","margin-top":"5em","margin-left":"","margin-right":"", "text-align":""});
+    $('#zipcode-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
+    $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
+  }
 
   function submitFormData(zipcode) {
     $.ajax({
@@ -153,22 +163,11 @@ var map;
       success: function(result) {
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#rating').text(result["rating"]);
-        debugger;
-        $('#map-background').css("height", "40%");
-        $('.results-box').slideToggle();
-        $('#zipcode-form').css({"width":"100%","margin-top":"5em","margin-left":"","margin-right":"", "text-align":""});
-        $('#zipcode-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
-        $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
-        // $('#rating')
-        // append data to results-box
-        // change css to display results box
-        debugger;
-        // Append the result to a table or list, $("list").append(result)
+        recenterMap();
+        updatePageStyle();
       }
     });
   }
-
-
 
 </script>
 <script async defer

@@ -13,15 +13,12 @@
 <!-- <div class="results-box">
 </div> -->
 <aside class="results-box">
-<div class="result-text">
-
-  <p>The Air Quality in  <span id="city-country"> </span> is
-     <span class="text-emphasis" id="rating"> </span></p>
-     <%= image_tag 'good1.png'%>
-</div>
-
+  <div id="result-text">
+    <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
+      <span class="text-emphasis" id="rating"> </span></p>
+    </div>
+    <%#= image_tag 'good1.png', id: "emoji-mage"%>
 </aside>
-
 
 <script>
 var map;
@@ -160,9 +157,9 @@ var map;
       success: function(result) {
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#rating').text(result["rating"]);
-        
         recenterMap();
         updatePageStyle();
+        // applyEmoji();
       }
     });
   }

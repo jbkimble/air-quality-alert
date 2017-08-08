@@ -175,3 +175,24 @@ input:focus {
   margin-top: 20px;
   padding-left:37px;
 }
+
+#emoji-mage {
+  float: left;
+  width: 15%;
+  margin-left: 7%;/
+  padding-top: 11%;
+  margin-bottom: auto;
+}
+
+.text-emphasis{
+  font-family: AvenirNext-DemiBold;
+  color: #265de0;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+
+#result-text {
+  font-size: 1em;
+  font-family: AvenirNext-Medium;
+  color: #265de0;
+}

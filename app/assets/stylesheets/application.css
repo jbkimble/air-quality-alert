@@ -13,3 +13,186 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body {
+     max-width: 100%;
+     overflow-x: hidden;
+     background-color: #F1EFE9;
+ }
+
+ .results-box {
+ background-color: white;
+ height: 60%;
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ left:0;
+ box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ border-radius: 10px 10px 0px 0px;
+ border-top: 6px solid #265DE0;
+ border-left: 4px solid #265DE0;
+ border-right: 4px solid #265DE0;
+ text-align: center;
+ }
+
+ .result-text {
+  color: #265de0;
+  font-family: AvenirNext-Regular;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-align:center;
+ }
+
+ .text-emphasis {
+
+ }
+
+ /*.close {
+   height: 50%;
+   width: 100%;
+   position:absolute;
+   top: 0;
+   left: 0;
+   z-index: 0;
+   frameborder:0;
+ }*/
+
+.top-bar{
+  background: #265DE0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  min-height: 102px;
+  height: 9.9%;
+}
+
+#zipcode-form {
+  position: relative;
+  z-index: 4;
+  width: 45%;
+  margin-top: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  height: 170px;
+  text-align: center;
+  opacity: .9;
+  caret-color: #265de0;
+  caret-width: 20px;
+  -webkit-transition: width 1s;
+
+}
+
+#zipcode-input {
+  width: 100%;
+  height: 70px;
+  background-color: #D8D8D8;
+  border: 7px solid #265DE0;
+  border-radius: 61px;
+  text-align: center;
+  font-family: AvenirNext-DemiBold;
+  letter-spacing: 1px;
+  -webkit-transition: margin-left 1s;
+}
+
+#submit-button {
+  margin-top: 5%;
+  padding: 10px 10px 10px 10px;
+  background-color: #265de0;
+  border: none;
+  color: white;
+  font-family: AvenirNext-Medium;
+  font-size: 1.5em;
+  border-radius: 19px;
+  cursor:pointer;
+  -webkit-transition: margin-right 1s;
+  /*overflow-x: visible;*/
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #265DE0;
+  letter-spacing: 1px;
+  font-family: AvenirNext-DemiBold;
+  text-align: center;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #265DE0;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #265DE0;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #265DE0;
+}
+
+input{
+  color: #265DE0;
+  font-size: 2.2em;
+}
+
+input:focus {
+  outline:none;
+  font-size: 2.5em;
+  text-align: center;
+  font-family: AvenirNext-DemiBold;
+  letter-spacing: 1px;
+  color: #265de0;
+}
+
+#map-background {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  frameborder:0;
+  -webkit-transition: height 1s; /* Safari */
+  transition: height 1s;
+}
+
+#header-question {
+  font-family: Shrikhand-Regular;
+  font-size: 2.5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-top: 0px;
+  line-height: 90%;
+  padding-left:35px;
+}
+
+#logo {
+  font-family: AvenirNext-DemiBold;
+  font-size: .5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin:0px;
+  margin-top: 20px;
+  padding-left:37px;
+}
+
+#emoji-mage {
+  float: left;
+  width: 15%;
+  margin-left: 7%;/
+  padding-top: 11%;
+  margin-bottom: auto;
+}
+
+.text-emphasis{
+  font-family: AvenirNext-DemiBold;
+  color: #265de0;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+
+#result-text {
+  font-size: 1em;
+  font-family: AvenirNext-Medium;
+  color: #265de0;
+}

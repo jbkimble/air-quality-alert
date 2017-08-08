@@ -1,0 +1,170 @@
+<div id="map-background"></div>
+
+<div class="top-bar">
+  <p id="logo">Air-Quality-Alert.net</p>
+  <p id="header-question">What is my air quality?</p>
+</div>
+
+<div id="zipcode-form">
+    <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
+    <%= submit_tag "Get Air Quality", id:'submit-button' %>
+</div>
+
+<!-- <div class="results-box">
+</div> -->
+<aside class="results-box">
+  <div id="result-text">
+    <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
+      <span class="text-emphasis" id="rating"> </span></p>
+    </div>
+    <%#= image_tag 'good1.png', id: "emoji-mage"%>
+</aside>
+
+<script>
+var map;
+  function initMap() {
+
+    var styledMapType = new google.maps.StyledMapType(
+      [
+{
+"featureType": "administrative.land_parcel",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "administrative.neighborhood",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.business",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.park",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.arterial",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.highway",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.local",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "water",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+}
+],
+        {name: 'Styled Map'});
+
+    map = new google.maps.Map(document.getElementById('map-background'), {
+      center: {lat: 47.6062, lng: -122.3321},
+      streetViewControl: false,
+      scaleControl: false,
+      draggable: false,
+      zoomControl: false,
+      zoom: 10,
+      mapTypeControlOptions: {
+        mapTypeIds: []
+      }
+    });
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+  }
+
+  $('.results-box').hide();
+
+  $('#submit-button').click(function(){
+    var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
+    submitFormData(zipcode);
+  });
+
+  function recenterMap() {
+    map.setCenter({lat: 47.45, lng: -122.3321});
+  }
+
+  function updatePageStyle() {
+    $('#map-background').css("height", "40%");
+    $('.results-box').slideToggle();
+    $('#zipcode-form').css({"width":"100%","margin-top":"5em","margin-left":"","margin-right":"", "text-align":""});
+    $('#zipcode-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
+    $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
+  }
+
+  function submitFormData(zipcode) {
+    $.ajax({
+      type: "POST",
+      url: "/airquality",
+      data: {"zipcode": zipcode},
+      dataType: "json",
+      success: function(result) {
+        $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+        $('#rating').text(result["rating"]);
+        recenterMap();
+        updatePageStyle();
+        // applyEmoji();
+      }
+    });
+  }
+
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+</script>

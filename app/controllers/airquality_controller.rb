@@ -26,12 +26,6 @@ class AirqualityController < ApplicationController
     respond_to do |format|
       format.json { render json: wp.to_json, :status => :ok}
     end
-    # if wp.save
-    #   redirect_to airquality_path(wp.id)
-    # else
-    #   redirect_to root_path
-    # end
-
   end
 
 end

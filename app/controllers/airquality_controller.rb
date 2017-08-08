@@ -3,28 +3,16 @@ class AirqualityController < ApplicationController
     @weatherpoint = WeatherPoint.last
   end
 
-  def show
-  end
-
   def create
-    uri = URI.parse("https://maps.googleapis.com/maps/api/geocode/json?address=#{params["zipcode"]}&key=#{ENV["google_key"]}")
-    response = Net::HTTP.get(uri)
-    lat_lng = JSON.parse(response, symbolize_names: true)[:results][0][:geometry][:location]
-    lattitude = lat_lng[:lat]
-    longitude = lat_lng[:lng]
-
-    uri = URI.parse("http://api.airvisual.com//v2/nearest_city?key=#{ENV["av_key"]}&lat=#{lattitude}&lon=#{longitude}")
-    response = Net::HTTP.get(uri)
-    air_quality_data = JSON.parse(response, symbolize_names: true)
-    us_aqi = air_quality_data[:data][:current][:pollution][:aqius]
-    city_name = air_quality_data[:data][:city]
-    state_name = air_quality_data[:data][:state]
-    country_name = air_quality_data[:data][:country]
-    wp = WeatherPoint.new(city: city_name, state: state_name, country: country_name,
-                    zipcode: params["zipcode"], aqi: us_aqi, rating:WeatherPoint.get_rating(us_aqi))
-    wp.save
-    respond_to do |format|
-      format.json { render json: wp.to_json, :status => :ok}
+    local_air_data = AirDataService.new.get_air_quality(params["zipcode"])
+    local_air_data[:rating] = WeatherPoint.get_us_rating(local_air_data[:us_aqi])
+    wp = WeatherPoint.new(local_air_data)
+    if wp.save
+      respond_to do |format|
+        format.json { render json: wp.to_json, :status => :ok}
+      end
+    else
+      # descriptive flash message
     end
   end
 

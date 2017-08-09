@@ -1,5 +1,5 @@
 class LatLongService
-
+require 'net/http'
   def self.get_lat_long(zipcode)
     uri = URI.parse("https://maps.googleapis.com/maps/api/geocode/json?address=#{zipcode}&key=#{ENV["google_key"]}")
     response = Net::HTTP.get(uri)

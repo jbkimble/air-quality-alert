@@ -6,8 +6,7 @@ This project was inspired by the recent forest fires in the British Columbia reg
 During this time many people engaged in activities which put them at risk because a lack of awareness.  In the future Air-Quality-Alert will allow individuals, particularly sensitive populations, to be alerted as soon as conditions in their area are harmful so they can take appropriate measures to protect the health of themselves and their loved ones.
 
 # Live Website
-* [Air-Quality-Alert](https://air-quality-alert.herokuapp.com/ "Google's Homepage") 
-* While the Air-Quality-Alert website is still in active development, an early itteration of the application is available online.  This first itteration allows visitors a friendly interface to check the Air-Quality in their area. (note: there are known bugs in this early deployment, if a zipcode in your area doesn't work please refresh the page and try another zipcode)
+* While the [Air-Quality-Alert Website](https://air-quality-alert.herokuapp.com/ "Air-quality-alert Homepage") is still in active development, an early itteration of the application is available online.  This first itteration allows visitors a friendly interface to check the Air-Quality in their area. (note: there are known bugs in this early deployment, if a zipcode in your area doesn't work please refresh the page and try another zipcode)
 * New features will be added as they are developed so check back soon!
 
 

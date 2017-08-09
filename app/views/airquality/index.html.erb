@@ -16,8 +16,23 @@
   <div id="result-text">
     <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
       <span class="text-emphasis" id="rating"> </span></p>
-    </div>
+  </div>
     <%#= image_tag 'good1.png', id: "emoji-mage"%>
+
+  <div id="call-box">
+    <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
+
+    <p id="call-to-action"><span class="underline"> Text</span> me at <span class="underline" id="phone"> 555 555 5555</span> if the air quality in Seattle is <span class="underline" id="drp-btn">poor</span>*</p>
+      <div id="menu">
+        <ul>
+          <li><a href="">Home</a>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+        </li>
+      </div>
+  </div>
 </aside>
 
 <script>
@@ -163,6 +178,34 @@ var map;
       }
     });
   }
+
+  $('#phone').click(function() {
+    console.log("yup");
+    // this.innerText = "()_"
+    // this.innerHtml = "<form><input type='text'> </input></form>"
+    // debugger;
+    // this.contentEditable = true;
+    var $el = $(this);
+    var $input = $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input");
+    $el.replaceWith( $input );
+    $input.focus();
+// .attr("placeholder", "Type your answer here");
+
+    var save = function(){
+      var $p = $('<p data-editable />').text( $input.val() );
+      $input.replaceWith( $p );
+    };
+
+    /**
+      We're defining the callback with `one`, because we know that
+      the element will be gone just after that, and we don't want
+      any callbacks leftovers take memory.
+      Next time `p` turns into `input` this single callback
+      will be applied again.
+    */
+    // $input.one('blur', save).focus();
+
+  });
 
 </script>
 <script async defer

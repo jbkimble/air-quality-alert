@@ -2,7 +2,7 @@
 
 ![Air-quality-alert home](https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png "Homepage")
 
-<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" width="200" height="200" />
+<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="200" />
 
 # The Air-Quality-Alert Story
 Air-Quality-Alert is a website where visitors can go to check the Air Quality of different locations around the world.  Visitors can also sign up to receive text or email alerts when the Air Quality in their area reaches the Moderate, Unhealthy For Sensitive Groups, Unhealthy, Very Unhealthy, or Hazardous designations set by the EPA.

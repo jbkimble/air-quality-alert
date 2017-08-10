@@ -37,8 +37,8 @@ class AirDataService
 
   def get_useful_data(air_quality_data)
     {
-      latitude: air_quality_data[:location][:coordinates][0].to_s,
-      longitude: air_quality_data[:location][:coordinates][1].to_s,
+      latitude: air_quality_data[:location][:coordinates][1].to_s,
+      longitude: air_quality_data[:location][:coordinates][0].to_s,
       us_aqi: air_quality_data[:current][:pollution][:aqius],
       china_aqi: air_quality_data[:current][:pollution][:aqicn],
       city: air_quality_data[:city],

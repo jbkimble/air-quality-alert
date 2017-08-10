@@ -31,7 +31,7 @@ describe WeatherPoint do
     end
 
     it 'is invalid without aqi' do
-      measurement = Fabricate.build(:weatherPoint, aqi: nil)
+      measurement = Fabricate.build(:weatherPoint, us_aqi: nil)
       expect(measurement).to be_invalid
     end
 
@@ -43,15 +43,15 @@ describe WeatherPoint do
 
   context 'test methods' do
     scenario 'get_rating method returns proper rating' do
-      rating_good = WeatherPoint.get_rating(5)
-      rating_moderate = WeatherPoint.get_rating(51)
-      rating_unhealthy_1 = WeatherPoint.get_rating(121)
-      rating_unhealthy_11 = WeatherPoint.get_rating(150)
-      rating_unhealthy_2 = WeatherPoint.get_rating(151)
-      rating_very_unhealthy = WeatherPoint.get_rating(222)
-      rating_hazardous = WeatherPoint.get_rating(330)
-      invalid_1 = WeatherPoint.get_rating(501)
-      invalid_2 = WeatherPoint.get_rating(-1)
+      rating_good = WeatherPoint.get_us_rating(5)
+      rating_moderate = WeatherPoint.get_us_rating(51)
+      rating_unhealthy_1 = WeatherPoint.get_us_rating(121)
+      rating_unhealthy_11 = WeatherPoint.get_us_rating(150)
+      rating_unhealthy_2 = WeatherPoint.get_us_rating(151)
+      rating_very_unhealthy = WeatherPoint.get_us_rating(222)
+      rating_hazardous = WeatherPoint.get_us_rating(330)
+      invalid_1 = WeatherPoint.get_us_rating(501)
+      invalid_2 = WeatherPoint.get_us_rating(-1)
 
       expect(rating_good).to eq("Good")
       expect(rating_moderate).to eq("Moderate")

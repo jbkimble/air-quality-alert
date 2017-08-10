@@ -39,6 +39,16 @@ describe WeatherPoint do
       measurement = Fabricate.build(:weatherPoint, rating: nil)
       expect(measurement).to be_invalid
     end
+
+    it 'is invalid without latitude' do
+      measurement = Fabricate.build(:weatherPoint, latitude: nil)
+      expect(measurement).to be_invalid
+    end
+
+    it 'is invalid without longitude' do
+      measurement = Fabricate.build(:weatherPoint, longitude: nil)
+      expect(measurement).to be_invalid
+    end
   end
 
   context 'test methods' do
@@ -60,8 +70,8 @@ describe WeatherPoint do
       expect(rating_unhealthy_2).to eq("Unhealthy")
       expect(rating_very_unhealthy).to eq("Very Unhealthy")
       expect(rating_hazardous).to eq("Hazardous")
-      expect(invalid_1).to eq("Invalid AQI")
-      expect(invalid_2).to eq("Invalid AQI")
+      expect(invalid_1).to eq("Invalid US AQI")
+      expect(invalid_2).to eq("Invalid US AQI")
     end
   end
 end

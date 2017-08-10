@@ -1,6 +1,6 @@
 class WeatherPoint < ApplicationRecord
-  validates :city, :state, :country, :zipcode, :us_aqi, :china_aqi,
-            :rating, :latitude, :longitude, presence: true
+  validates :city, :state, :country, :zipcode, :us_aqi, :rating,
+            :latitude, :longitude, presence: true
 
   def self.get_us_rating(aqi)
     if 0 <= aqi && aqi <= 50
@@ -16,7 +16,7 @@ class WeatherPoint < ApplicationRecord
     elsif 301 <= aqi && aqi <= 500
       return "Hazardous"
     else
-      return "Invalid AQI"
+      return "Invalid US AQI"
     end
   end
 

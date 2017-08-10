@@ -18,4 +18,5 @@ describe 'as a visitor', js: true do
     expect(page).to have_content("Unhealthy for Sensitive Groups")
     expect(page).to have_content("Seattle-Bellevue-Kent Valley, USA")
   end
+
 end

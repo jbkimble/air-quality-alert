@@ -23,4 +23,11 @@ describe 'as a visitor', js: true do
     end
   end
 
+  scenario 'When I enter a non valid zipcode I get descriptive error messages' do
+    visit root_path
+    fill_in 'zipcode', with: 'a'
+
+    expect(page).to have_content("Please enter a valid 6 digit zipcode")
+  end
+
 end

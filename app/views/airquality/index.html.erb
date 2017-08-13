@@ -3,7 +3,11 @@
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
   <p id="header-question">What is my air quality?</p>
+  <div id="helpful-flash">
+    <h2 id="flash-text">Please enter a valid 6 digit zipcode</h2>
+  </div>
 </div>
+
 
 <div id="zipcode-form">
     <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
@@ -145,6 +149,7 @@ var map;
   }
 
   $('.results-box').hide();
+  $('#helpful-flash').hide();
 
   $('#submit-button').click(function(){
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
@@ -181,30 +186,23 @@ var map;
 
   $('#phone').click(function() {
     console.log("yup");
-    // this.innerText = "()_"
-    // this.innerHtml = "<form><input type='text'> </input></form>"
-    // debugger;
-    // this.contentEditable = true;
     var $el = $(this);
     var $input = $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input");
     $el.replaceWith( $input );
     $input.focus();
-// .attr("placeholder", "Type your answer here");
-
     var save = function(){
       var $p = $('<p data-editable />').text( $input.val() );
       $input.replaceWith( $p );
     };
 
-    /**
-      We're defining the callback with `one`, because we know that
-      the element will be gone just after that, and we don't want
-      any callbacks leftovers take memory.
-      Next time `p` turns into `input` this single callback
-      will be applied again.
-    */
-    // $input.one('blur', save).focus();
+  });
 
+  $('#zipcode-form').keydown(function(){
+    var regex = /[0-9]|\./;
+    if (!regex.test(event.key) && event.keyCode != 8 && event.keyCode != 13) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+      return false
+    }
   });
 
 </script>

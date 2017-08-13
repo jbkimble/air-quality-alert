@@ -244,3 +244,19 @@ input:focus {
   font-family: AvenirNext-DemiBold;
   text-align: center;
 }
+
+#helpful-flash {
+  margin-top: -2%;
+  /*background-color: #9efffd;*/
+  background-color: white;
+  z-index:1;
+  height:50%;
+  width:100%;
+  text-align: center;
+}
+
+#flash-text {
+  line-height:50px;
+  font-family: AvenirNext-DemiBold;
+  color: #265DE0;
+}

@@ -199,7 +199,13 @@ var map;
 
   $('#zipcode-form').keydown(function(){
     var regex = /[0-9]|\./;
-    if (!regex.test(event.key) && event.keyCode != 8 && event.keyCode != 13) {
+    var inputLength = $('#zipcode-input').val().length;
+    var keyPressed = event.keyCode
+    debugger;
+    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+      return false
+    } else if (inputLength > 4) {
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
       return false
     }

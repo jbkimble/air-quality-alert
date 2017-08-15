@@ -4,7 +4,7 @@
   <p id="logo">Air-Quality-Alert.net</p>
   <p id="header-question">What is my air quality?</p>
   <div id="helpful-flash">
-    <h2 id="flash-text">Please enter a valid 6 digit zipcode</h2>
+    <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
   </div>
 </div>
 
@@ -153,7 +153,11 @@ var map;
 
   $('#submit-button').click(function(){
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
-    submitFormData(zipcode);
+    if (zipcode.length != 5) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+    } else {
+      submitFormData(zipcode);
+    }
   });
 
   function recenterMap() {

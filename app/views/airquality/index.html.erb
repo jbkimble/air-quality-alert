@@ -8,7 +8,6 @@
   </div>
 </div>
 
-
 <div id="zipcode-form">
     <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
     <%= submit_tag "Get Air Quality", id:'submit-button', type:'button' %>
@@ -26,16 +25,8 @@
   <div id="call-box">
     <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
 
-    <p id="call-to-action"><span class="underline"> Text</span> me at <span class="underline" id="phone"> 555 555 5555</span> if the air quality in Seattle is <span class="underline" id="drp-btn">poor</span>*</p>
-      <div id="menu">
-        <ul>
-          <li><a href="">Home</a>
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Disclaimer</a></li>
-            </ul>
-        </li>
-      </div>
+    <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
+
   </div>
 </aside>
 
@@ -182,6 +173,7 @@ var map;
       dataType: "json",
       success: function(result) {
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+        $('#city').text(`${result["city"]}`);
         $('#rating').text(result["rating"]);
         if (updatedBefore) {
 
@@ -195,17 +187,24 @@ var map;
     });
   }
 
-  $('#phone').click(function() {
-    var $el = $(this);
-    var $input = $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input");
-    $el.replaceWith( $input );
-    $input.focus();
-    var save = function(){
-      var $p = $('<p data-editable />').text( $input.val() );
-      $input.replaceWith( $p );
-    };
+  $('#phone').append(
+    $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input")
+  )
 
-  });
+  $('#drp-btn').append(
+    $('<select>').append(
+      $("<option>").text("Good"),
+      $("<option>").text("Moderate"),
+      $("<option>").text("Unhealthy For Sensitive Groups"),
+      $("<option>").text("Unhealthy"),
+      $("<option>").text("Very Unhealthy"),
+      $("<option>").text("Hazardous")
+    )
+  )
+
+  $('#sbmt-text-info').append(
+    $('<button>').html('Submit')
+  )
 
   $('#zipcode-form').keyup(function(){
     var regex = /[0-9]|\./;

@@ -25,7 +25,7 @@
   <div id="call-box">
     <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
 
-    <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
+    <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city-zip'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
 
   </div>
 </aside>
@@ -172,8 +172,9 @@ var map;
       data: {"zipcode": zipcode},
       dataType: "json",
       success: function(result) {
+        debugger;
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
-        $('#city').text(`${result["city"]}`);
+        $('#city-zip').text(`${result["zipcode"]}`);
         $('#rating').text(result["rating"]);
         if (updatedBefore) {
 
@@ -196,7 +197,7 @@ var map;
       $("<option>").text("Good"),
       $("<option>").text("Moderate"),
       $("<option>").text("Unhealthy For Sensitive Groups"),
-      $("<option>").text("Unhealthy"),
+      $("<option>").text("Unhealthy").attr('selected', true),
       $("<option>").text("Very Unhealthy"),
       $("<option>").text("Hazardous")
     )
@@ -205,6 +206,44 @@ var map;
   $('#sbmt-text-info').append(
     $('<button>').html('Submit')
   )
+
+  $('#sbmt-text-info').click(function(){
+    var alertAQI = $('#drp-btn option:selected').text()
+    var phoneNumber = $('#phone-input').val()
+    var zipcode = $("#city-zip").html()
+
+    $.ajax({
+      type: "POST",
+      url: "/alert",
+      data: {"zipcode": zipcode, "phone": phoneNumber, "alert_level": alertAQI, "active": true },
+      dataType: "json",
+      success: function(result) {
+        var path = 'http://localhost:3000/alert/' + result["id"]
+        window.location = path
+      }
+    });
+  })
+
+  function submitFormData(zipcode) {
+    $.ajax({
+      type: "POST",
+      url: "/airquality",
+      data: {"zipcode": zipcode},
+      dataType: "json",
+      success: function(result) {
+        $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+        $('#city-zip').text(`${result["zipcode"]}`);
+        $('#rating').text(result["rating"]);
+        if (updatedBefore) {
+        } else {
+          recenterMap();
+          updatePageStyle();
+          updatedBefore = true;
+        }
+        // applyEmoji();
+      }
+    });
+  }
 
   $('#zipcode-form').keyup(function(){
     var regex = /[0-9]|\./;

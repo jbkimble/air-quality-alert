@@ -197,15 +197,18 @@ var map;
 
   });
 
-  $('#zipcode-form').keydown(function(){
+  $('#zipcode-form').keyup(function(){
     var regex = /[0-9]|\./;
-    var inputLength = $('#zipcode-input').val().length;
+    var inputVal = $('#zipcode-input').val()
+    var inputLength = inputVal.length;
     var keyPressed = event.keyCode
     debugger;
     if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $('#zipcode-input').val(inputVal.slice(0, -1));
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
+
       return false
-    } else if (inputLength > 4) {
+    } else if (inputLength > 5) {
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
       return false
     }

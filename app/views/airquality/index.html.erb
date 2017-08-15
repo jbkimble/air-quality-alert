@@ -11,7 +11,7 @@
 
 <div id="zipcode-form">
     <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
-    <%= submit_tag "Get Air Quality", id:'submit-button' %>
+    <%= submit_tag "Get Air Quality", id:'submit-button', type:'button' %>
 </div>
 
 <!-- <div class="results-box">
@@ -172,6 +172,8 @@ var map;
     $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
   }
 
+  var updatedBefore = false;
+
   function submitFormData(zipcode) {
     $.ajax({
       type: "POST",
@@ -181,15 +183,19 @@ var map;
       success: function(result) {
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#rating').text(result["rating"]);
-        recenterMap();
-        updatePageStyle();
+        if (updatedBefore) {
+
+        } else {
+          recenterMap();
+          updatePageStyle();
+          updatedBefore = true;
+        }
         // applyEmoji();
       }
     });
   }
 
   $('#phone').click(function() {
-    console.log("yup");
     var $el = $(this);
     var $input = $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input");
     $el.replaceWith( $input );
@@ -206,14 +212,14 @@ var map;
     var inputVal = $('#zipcode-input').val()
     var inputLength = inputVal.length;
     var keyPressed = event.keyCode
-    debugger;
+
     if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
       $('#zipcode-input').val(inputVal.slice(0, -1));
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
-
       return false
     } else if (inputLength > 5) {
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
+      $('#zipcode-input').val(inputVal.slice(0, -1));
       return false
     }
   });

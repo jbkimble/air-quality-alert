@@ -27,14 +27,22 @@ describe 'as a visitor', js: true do
     visit root_path
     fill_in 'zipcode', with: 'a'
 
-    expect(page).to have_content("Please enter a valid 6 digit zipcode")
+    expect(page).to have_content("Please enter a valid 5 digit zipcode")
   end
 
   scenario 'When I try to enter more than six numbers I get a descriptive error message' do
     visit root_path
     fill_in 'zipcode', with: '980006'
 
-    expect(page).to have_content("Please enter a valid 6 digit zipcode")
+    expect(page).to have_content("Please enter a valid 5 digit zipcode")
+  end
+
+  scenario 'User tries to submit a non 5 digit zip code' do
+    visit root_path
+    fill_in 'zipcode', with: '98'
+    find_button('Get Air Quality').click
+
+    expect(page).to have_content("Please enter a valid 5 digit zipcode")
   end
 
 end

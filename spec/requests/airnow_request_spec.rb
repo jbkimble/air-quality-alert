@@ -6,7 +6,7 @@ describe 'when a zipcode is sent to the air data service' do
 
         expect(local_data[:latitude]).to eq("47.562")
         expect(local_data[:longitude]).to eq("-122.3405")
-        expect(local_data[:us_aqi]).to eq("132")
+        expect(local_data[:us_aqi]).to eq("15")
         expect(local_data[:city]).to eq("Seattle-Bellevue-Kent Valley")
         expect(local_data[:state]).to eq("WA")
         expect(local_data[:country]).to eq("USA")

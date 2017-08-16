@@ -3,11 +3,14 @@
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
   <p id="header-question">What is my air quality?</p>
+  <div id="helpful-flash">
+    <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
+  </div>
 </div>
 
 <div id="zipcode-form">
     <%= text_field_tag 'zipcode', nil, placeholder: 'Enter Zipcode', id: 'zipcode-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Zipcode'", autocomplete:"off" %> <br>
-    <%= submit_tag "Get Air Quality", id:'submit-button' %>
+    <%= submit_tag "Get Air Quality", id:'submit-button', type:'button' %>
 </div>
 
 <!-- <div class="results-box">
@@ -22,16 +25,8 @@
   <div id="call-box">
     <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
 
-    <p id="call-to-action"><span class="underline"> Text</span> me at <span class="underline" id="phone"> 555 555 5555</span> if the air quality in Seattle is <span class="underline" id="drp-btn">poor</span>*</p>
-      <div id="menu">
-        <ul>
-          <li><a href="">Home</a>
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Disclaimer</a></li>
-            </ul>
-        </li>
-      </div>
+    <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city-zip'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
+
   </div>
 </aside>
 
@@ -145,10 +140,15 @@ var map;
   }
 
   $('.results-box').hide();
+  $('#helpful-flash').hide();
 
   $('#submit-button').click(function(){
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
-    submitFormData(zipcode);
+    if (zipcode.length != 5) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+    } else {
+      submitFormData(zipcode);
+    }
   });
 
   function recenterMap() {
@@ -163,6 +163,67 @@ var map;
     $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
   }
 
+  var updatedBefore = false;
+
+  function submitFormData(zipcode) {
+    $.ajax({
+      type: "POST",
+      url: "/airquality",
+      data: {"zipcode": zipcode},
+      dataType: "json",
+      success: function(result) {
+        debugger;
+        $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+        $('#city-zip').text(`${result["zipcode"]}`);
+        $('#rating').text(result["rating"]);
+        if (updatedBefore) {
+
+        } else {
+          recenterMap();
+          updatePageStyle();
+          updatedBefore = true;
+        }
+        // applyEmoji();
+      }
+    });
+  }
+
+  $('#phone').append(
+    $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input")
+  )
+
+  $('#drp-btn').append(
+    $('<select>').append(
+      $("<option>").text("Good"),
+      $("<option>").text("Moderate"),
+      $("<option>").text("Unhealthy For Sensitive Groups"),
+      $("<option>").text("Unhealthy").attr('selected', true),
+      $("<option>").text("Very Unhealthy"),
+      $("<option>").text("Hazardous")
+    )
+  )
+
+  $('#sbmt-text-info').append(
+    $('<button>').html('Submit')
+  )
+
+  $('#sbmt-text-info').click(function(){
+    var alertAQI = $('#drp-btn option:selected').text()
+    var phoneNumber = $('#phone-input').val()
+    var zipcode = $("#city-zip").html()
+
+    $.ajax({
+      type: "POST",
+      url: "/alert",
+      data: {"zipcode": zipcode, "phone": phoneNumber, "alert_level": alertAQI, "active": true },
+      dataType: "json",
+      success: function(result) {
+        var path = 'http://localhost:3000/alert/' + result["id"]
+        window.location = path
+      }
+    });
+  })
+
   function submitFormData(zipcode) {
     $.ajax({
       type: "POST",
@@ -171,40 +232,34 @@ var map;
       dataType: "json",
       success: function(result) {
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+        $('#city-zip').text(`${result["zipcode"]}`);
         $('#rating').text(result["rating"]);
-        recenterMap();
-        updatePageStyle();
+        if (updatedBefore) {
+        } else {
+          recenterMap();
+          updatePageStyle();
+          updatedBefore = true;
+        }
         // applyEmoji();
       }
     });
   }
 
-  $('#phone').click(function() {
-    console.log("yup");
-    // this.innerText = "()_"
-    // this.innerHtml = "<form><input type='text'> </input></form>"
-    // debugger;
-    // this.contentEditable = true;
-    var $el = $(this);
-    var $input = $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input");
-    $el.replaceWith( $input );
-    $input.focus();
-// .attr("placeholder", "Type your answer here");
+  $('#zipcode-form').keyup(function(){
+    var regex = /[0-9]|\./;
+    var inputVal = $('#zipcode-input').val()
+    var inputLength = inputVal.length;
+    var keyPressed = event.keyCode
 
-    var save = function(){
-      var $p = $('<p data-editable />').text( $input.val() );
-      $input.replaceWith( $p );
-    };
-
-    /**
-      We're defining the callback with `one`, because we know that
-      the element will be gone just after that, and we don't want
-      any callbacks leftovers take memory.
-      Next time `p` turns into `input` this single callback
-      will be applied again.
-    */
-    // $input.one('blur', save).focus();
-
+    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $('#zipcode-input').val(inputVal.slice(0, -1));
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+      return false
+    } else if (inputLength > 5) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+      $('#zipcode-input').val(inputVal.slice(0, -1));
+      return false
+    }
   });
 
 </script>

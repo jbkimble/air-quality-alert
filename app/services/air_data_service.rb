@@ -20,7 +20,7 @@ class AirDataService
   def use_backup_api(latitude, longitude)
     uri = URI.parse("http://www.airnowapi.org/aq/observation/latLong/current/?format=application/json&latitude=#{latitude}&longitude=#{longitude}&distance=200&API_KEY=#{ENV["airnow_key"]}")
     response = Net::HTTP.get(uri)
-    air_quality_data = JSON.parse(response, symbolize_names: true)[1]
+    air_quality_data = JSON.parse(response, symbolize_names: true)[0]
     air_quality_data
   end
 
@@ -29,7 +29,7 @@ class AirDataService
       latitude: air_quality_data[:Latitude].to_s,
       longitude: air_quality_data[:Longitude].to_s,
       us_aqi: air_quality_data[:AQI].to_s,
-      city: air_quality_data[:ReportingArea],
+      city: air_quality_data[:ReportingArea][/[^-]+/],
       state: air_quality_data[:StateCode],
       country: "USA"
     }

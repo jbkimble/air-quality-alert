@@ -19,7 +19,7 @@ describe 'as a visitor', js: true do
       find_button('Get Air Quality').click
       expect(current_path).to eq(root_path)
 
-      expect(page).to have_content("Seattle-Bellevue-Kent Valley, USA")
+      expect(page).to have_content("Seattle, USA")
       expect(page).to have_content("Good")
     end
   end
@@ -33,8 +33,8 @@ describe 'as a visitor', js: true do
     find_button('Get Air Quality').click
     expect(page).to have_content("Good")
     expect(page).to have_content("Bellingham, USA")
-    save_and_open_page
-    expect(page).to_not have_content("Seattle-Bellevue-Kent Valley, USA")
+
+    expect(page).to_not have_content("Seattle, USA")
 
   end
 

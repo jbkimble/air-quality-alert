@@ -6,6 +6,9 @@
   <div id="helpful-flash">
     <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
   </div>
+  <div id="helpful-phone-flash">
+    <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
+  </div>
 </div>
 
 <div id="zipcode-form">
@@ -141,6 +144,7 @@ var map;
 
   $('.results-box').hide();
   $('#helpful-flash').hide();
+  $('#helpful-phone-flash').hide();
 
   $('#submit-button').click(function(){
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
@@ -258,6 +262,23 @@ var map;
     } else if (inputLength > 5) {
       $('#helpful-flash').slideDown("slow").fadeOut(5000);
       $('#zipcode-input').val(inputVal.slice(0, -1));
+      return false
+    }
+  });
+
+  $('#phone-input').keyup(function(){
+    var regex = /[0-9]|\./;
+    var inputVal = $('#phone-input').val()
+    var inputLength = inputVal.length;
+    var keyPressed = event.keyCode
+
+    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $('#phone-input').val(inputVal.slice(0, -1));
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+      return false
+    } else if (inputLength > 10) {
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+      $('#phone-input').val(inputVal.slice(0, -1));
       return false
     }
   });

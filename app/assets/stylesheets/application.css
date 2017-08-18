@@ -257,7 +257,23 @@ input:focus {
   text-align: center;
 }
 
+#helpful-phone-flash {
+  margin-top: -2%;
+  /*background-color: #9efffd;*/
+  background-color: white;
+  z-index:1;
+  height:50%;
+  width:100%;
+  text-align: center;
+}
+
 #flash-text {
+  line-height:50px;
+  font-family: AvenirNext-Bold;
+  color: #265DE0;
+}
+
+#phone-flash-text {
   line-height:50px;
   font-family: AvenirNext-Bold;
   color: #265DE0;

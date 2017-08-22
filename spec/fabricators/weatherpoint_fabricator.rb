@@ -5,7 +5,7 @@ Fabricator(:weatherPoint) do
   zipcode Faker::Address.zip_code
   us_aqi Faker::Number.between(1, 200)
   china_aqi Faker::Number.between(1, 200)
-  rating Faker::Number.digit
+  air_index_id Faker::Number.between(1,4)
   latitude Faker::Number.digit
   longitude Faker::Number.digit
 end

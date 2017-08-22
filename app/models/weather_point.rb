@@ -18,7 +18,7 @@ class WeatherPoint < ApplicationRecord
     elsif 301 <= aqi && aqi <= 500
       return 6
     else
-      return "Invalid US AQI"
+      return 7
     end
   end
 

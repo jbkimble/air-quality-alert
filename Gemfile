@@ -50,6 +50,7 @@ group :development, :test do
   gem 'launchy'
   gem 'fabrication'
   gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :test do

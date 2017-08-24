@@ -176,7 +176,6 @@ var map;
       data: {"zipcode": zipcode},
       dataType: "json",
       success: function(result) {
-        debugger;
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#city-zip').text(`${result["zipcode"]}`);
         $('#rating').text(result["rating"]);

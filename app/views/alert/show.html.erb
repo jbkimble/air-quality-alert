@@ -10,8 +10,9 @@
   <h3>We'll send a text to <%= @alert.phone %></h3>
   <h3>When the air quality in <%= @alert.zipcode %> </h3>
   <h3>Is at or below the US governments '<%= @alert.air_index.index %>' designation </h3>
-  <h5>Sending a Welcome text now to confirm we have the right number one file</h5>
+  <h5>Sending a welcome text now to confirm we have the right number one file</h5>
   <h1>Thanks for using air quality alert!</h1>
+  <%= button_to "Cancel Alert", alert_path(:id => @alert.id), :method => :delete, id: "cancel-service"  %>
 </div>
 
 <script>
@@ -122,6 +123,19 @@ var map;
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
   }
+
+  $('#cancel-service').click(function(){
+    debugger;
+    $.ajax({
+      type: "POST",
+      url: "/alert",
+      data: {},
+      dataType: "json",
+      success: function(result) {
+        console.log("success")
+      }
+    });
+  })
 
   </script>
 <script async defer

@@ -313,3 +313,16 @@ select {
   z-index: 1;
   position: relative;
 }
+
+#cancel-service {
+  margin-top: 5%;
+  padding: 10px 10px 10px 10px;
+  background-color: #265de0;
+  border: none;
+  color: white;
+  font-family: AvenirNext-Medium;
+  font-size: 1.5em;
+  border-radius: 19px;
+  cursor:pointer;
+  -webkit-transition: margin-right 1s;
+}

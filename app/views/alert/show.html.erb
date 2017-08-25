@@ -1,2 +1,143 @@
-<h1>Alert Page</h1>
-<h2>Sending you a text</h2>
+<div id="map-background"></div>
+
+<div class="top-bar">
+  <p id="logo">Air-Quality-Alert.net</p>
+  <p id="header-question">What is my air quality?</p>
+</div>
+
+<div id="alert-box">
+  <h1>Alert Successfully Set!</h1>
+  <h3>We'll send a text to <%= @alert.phone %></h3>
+  <h3>When the air quality in <%= @alert.zipcode %> </h3>
+  <h3>Is at or below the US governments '<%= @alert.air_index.index %>' designation </h3>
+  <h5>Sending a welcome text now to confirm we have the right number one file</h5>
+  <h1>Thanks for using air quality alert!</h1>
+  <%= button_to "Cancel Alert", alert_path(:id => @alert.id), :method => :delete, id: "cancel-service"  %>
+</div>
+
+<script>
+var map;
+  function initMap() {
+
+    var styledMapType = new google.maps.StyledMapType(
+      [
+{
+"featureType": "administrative.land_parcel",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "administrative.neighborhood",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.business",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.park",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.arterial",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.highway",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.local",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "water",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+}
+],
+        {name: 'Styled Map'});
+
+    map = new google.maps.Map(document.getElementById('map-background'), {
+      center: {lat: 47.6062, lng: -122.3321},
+      streetViewControl: false,
+      scaleControl: false,
+      draggable: false,
+      zoomControl: false,
+      zoom: 10,
+      mapTypeControlOptions: {
+        mapTypeIds: []
+      }
+    });
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+  }
+
+  $('#cancel-service').click(function(){
+    debugger;
+    $.ajax({
+      type: "POST",
+      url: "/alert",
+      data: {},
+      dataType: "json",
+      success: function(result) {
+        console.log("success")
+      }
+    });
+  })
+
+  </script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+</script>

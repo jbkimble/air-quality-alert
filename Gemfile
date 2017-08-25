@@ -31,6 +31,7 @@ gem 'pry'
 gem 'faraday'
 gem "figaro"
 gem 'twilio-ruby', '~> 4.11.1'
+gem 'whenever', :require => false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'launchy'
   gem 'fabrication'
   gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :test do

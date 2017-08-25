@@ -10,18 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815224353) do
+ActiveRecord::Schema.define(version: 20170822180303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "air_indices", force: :cascade do |t|
+    t.string   "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "alerts", force: :cascade do |t|
     t.boolean  "active"
     t.string   "phone"
-    t.string   "alert_level"
     t.string   "zipcode"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "air_index_id"
   end
 
   create_table "weather_points", force: :cascade do |t|
@@ -30,12 +36,12 @@ ActiveRecord::Schema.define(version: 20170815224353) do
     t.string   "country"
     t.integer  "zipcode"
     t.string   "us_aqi"
-    t.string   "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "china_aqi"
     t.string   "latitude"
     t.string   "longitude"
+    t.integer  "air_index_id"
   end
 
 end

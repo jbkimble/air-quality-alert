@@ -14,10 +14,17 @@ class AlertController < ApplicationController
     @alert = Alert.find(params[:id])
   end
 
+  def destroy
+    alert = Alert.find(alert_params["id"])
+    alert.destroy
+    flash[:success] = 'Successfully ended alert!'
+    redirect_to root_path
+  end
+
   private
     def alert_params
       params[:air_index_id] = return_index_id(params[:alert_level])
-      params.permit(:phone, :air_index_id, :zipcode, :active)
+      params.permit(:phone, :air_index_id, :zipcode, :active, :id)
     end
 
     def return_index_id(alert_level)

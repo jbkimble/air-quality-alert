@@ -221,7 +221,8 @@ var map;
       data: {"zipcode": zipcode, "phone": phoneNumber, "alert_level": alertAQI, "active": true },
       dataType: "json",
       success: function(result) {
-        var path = 'http://localhost:3000/alert/' + result["id"]
+        // var path = 'http://localhost:3000/alert/' + result["id"]
+        var path = 'https://air-quality-alert.herokuapp.com/alert/' + result["id"]
         window.location = path
       }
     });

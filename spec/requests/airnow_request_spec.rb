@@ -1,7 +1,7 @@
 describe 'when a zipcode is sent to the air data service' do
   context 'and it has to use the backup api' do
    it 'gets a response from an api' do
-     VCR.use_cassette 'airnow' do
+     VCR.use_cassette 'airnow_two' do
         local_data = AirDataService.new.get_air_quality('98006')
 
         expect(local_data[:latitude]).to eq("47.562")
@@ -17,7 +17,7 @@ describe 'when a zipcode is sent to the air data service' do
 
   context 'it is able to use normal api' do
     it 'gets a response from an api' do
-      VCR.use_cassette 'airvisual' do
+      VCR.use_cassette 'airvisual_two' do
         local_data = AirDataService.new.get_air_quality('98225')
 
         expect(local_data[:latitude]).to eq("48.762699")

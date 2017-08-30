@@ -3,7 +3,8 @@ require 'rails_helper'
 describe WeatherPoint do
   context 'validate attributes' do
     it 'is valid with city, state, country, zipcode, airquality, and rating' do
-      measurement = Fabricate.build(:weatherPoint)
+      id = Fabricate.create(:airIndex).id
+      measurement = Fabricate.build(:weatherPoint, air_index_id: id)
 
       expect(measurement).to be_valid
     end

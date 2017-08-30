@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '9:44 am' do
-  runner "AlertService.send_alerts"
-end
+# every 1.day, :at => '9:44 am' do
+#   runner "AlertService.send_alerts"
+# end

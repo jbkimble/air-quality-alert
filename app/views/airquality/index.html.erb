@@ -19,6 +19,8 @@
 <!-- <div class="results-box">
 </div> -->
 <aside class="results-box">
+  <span id="image-span"></span>
+  <%#= image_tag "/assets/" + @weatherpoint.get_smiley_path, id:"emoji-image"%>
   <div id="result-text">
     <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
       <span class="text-emphasis" id="rating"> </span></p>
@@ -168,28 +170,32 @@ var map;
   }
 
   var updatedBefore = false;
-
-  function submitFormData(zipcode) {
-    $.ajax({
-      type: "POST",
-      url: "/airquality",
-      data: {"zipcode": zipcode},
-      dataType: "json",
-      success: function(result) {
-        $('#city-country').text(`${result["city"]}, ${result["country"]}`);
-        $('#city-zip').text(`${result["zipcode"]}`);
-        $('#rating').text(result["rating"]);
-        if (updatedBefore) {
-
-        } else {
-          recenterMap();
-          updatePageStyle();
-          updatedBefore = true;
-        }
-        // applyEmoji();
-      }
-    });
-  }
+  //
+  // function submitFormData(zipcode) {
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "/airquality",
+  //     data: {"zipcode": zipcode},
+  //     dataType: "json",
+  //     success: function(result) {
+  //       $('#city-country').text(`${result["city"]}, ${result["country"]}`);
+  //       $('#city-zip').text(`${result["zipcode"]}`);
+  //       $('#rating').text(result["rating"]);
+  //       debugger;
+  //       $('#image-span').append(
+  //         "<img id='emoji-image' src='/assets/' + get_smiley_path()>"
+  //       )
+  //       if (updatedBefore) {
+  //
+  //       } else {
+  //         recenterMap();
+  //         updatePageStyle();
+  //         updatedBefore = true;
+  //       }
+  //       // applyEmoji();
+  //     }
+  //   });
+  // }
 
   $('#phone').append(
     $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input")
@@ -237,6 +243,10 @@ var map;
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#city-zip').text(`${result["zipcode"]}`);
         $('#rating').text(result["rating"]);
+
+        $('#image-span').empty().append(
+          `<img id='emoji-image' src='/assets/${get_smiley_path(result["rating"])}' >`
+        )
         if (updatedBefore) {
         } else {
           recenterMap();
@@ -247,6 +257,14 @@ var map;
       }
     });
   }
+
+  function get_smiley_path(rating) {
+    var imageStore = {"Good": "good.png", "Moderate": "moderate.png",
+                      "Unhealthy for Sensitive Groups": "sensitive.png", "Unhealthy": 'unhealthy.png',
+                      "Very Unhealthy": "very_unhealthy.png", "Hazardous": "hazardous.png"}
+    return imageStore[rating];
+  }
+
 
   $('#zipcode-form').keyup(function(){
     var regex = /[0-9]|\./;

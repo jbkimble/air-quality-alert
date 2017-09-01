@@ -19,20 +19,20 @@
 <!-- <div class="results-box">
 </div> -->
 <aside class="results-box">
-  <span id="image-span"></span>
-  <%#= image_tag "/assets/" + @weatherpoint.get_smiley_path, id:"emoji-image"%>
-  <div id="result-text">
-    <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
-      <span class="text-emphasis" id="rating"> </span></p>
-  </div>
-    <%#= image_tag 'good1.png', id: "emoji-mage"%>
+    <span id="image-span"></span>
+    <%#= image_tag "/assets/" + @weatherpoint.get_smiley_path, id:"emoji-image"%>
+    <div id="result-text">
+      <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
+        <span class="text-emphasis" id="rating"> </span></p>
+    </div>
+      <%#= image_tag 'good1.png', id: "emoji-mage"%>
 
-  <div id="call-box">
-    <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
+    <div id="call-box">
+      <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
 
-    <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city-zip'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
+      <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city-zip'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
 
-  </div>
+    </div>
 </aside>
 
 <script>
@@ -233,6 +233,13 @@ var map;
     });
   })
 
+  function highlightFlash() {
+    $('.results-box').addClass('backgroundAnimated')
+    setTimeout(function () {
+      $('.results-box').removeClass('backgroundAnimated');
+    }, 380);
+  }
+
   function submitFormData(zipcode) {
     $.ajax({
       type: "POST",
@@ -240,20 +247,16 @@ var map;
       data: {"zipcode": zipcode},
       dataType: "json",
       success: function(result) {
+        if (updatedBefore) { highlightFlash(); }
         $('#city-country').text(`${result["city"]}, ${result["country"]}`);
         $('#city-zip').text(`${result["zipcode"]}`);
         $('#rating').text(result["rating"]);
-
-        $('#image-span').empty().append(
-          `<img id='emoji-image' src='/assets/${get_smiley_path(result["rating"])}' >`
-        )
-        if (updatedBefore) {
-        } else {
+        $('#image-span').empty().append( `<img id='emoji-image' src='/assets/${get_smiley_path(result["rating"])}' >`)
+        if (updatedBefore) { } else {
           recenterMap();
           updatePageStyle();
           updatedBefore = true;
         }
-        // applyEmoji();
       }
     });
   }

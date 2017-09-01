@@ -3,6 +3,7 @@
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
   <p id="header-question">What is my air quality?</p>
+  <%= link_to "Cancel Alert", "#", id: "cancel-button" %>
   <div id="helpful-flash">
     <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
   </div>
@@ -16,16 +17,12 @@
     <%= submit_tag "Get Air Quality", id:'submit-button', type:'button' %>
 </div>
 
-<!-- <div class="results-box">
-</div> -->
 <aside class="results-box">
     <span id="image-span"></span>
-    <%#= image_tag "/assets/" + @weatherpoint.get_smiley_path, id:"emoji-image"%>
     <div id="result-text">
       <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
         <span class="text-emphasis" id="rating"> </span></p>
     </div>
-      <%#= image_tag 'good1.png', id: "emoji-mage"%>
 
     <div id="call-box">
       <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
@@ -234,9 +231,9 @@ var map;
   })
 
   function highlightFlash() {
-    $('.results-box').addClass('backgroundAnimated')
+    $('.results-box').addClass('backgroundColorFlash')
     setTimeout(function () {
-      $('.results-box').removeClass('backgroundAnimated');
+      $('.results-box').removeClass('backgroundColorFlash');
     }, 380);
   }
 

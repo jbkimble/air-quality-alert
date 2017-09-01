@@ -179,12 +179,18 @@ input:focus {
   padding-left:37px;
 }
 
-#emoji-mage {
+#emoji-image {
   float: left;
-  width: 15%;
+  width: 22%;
   margin-left: 7%;
-  padding-top: 11%;
   margin-bottom: auto;
+}
+
+#result-text {
+  margin-top: 10%;
+  font-size: 1.5em;
+  font-family: AvenirNext-Medium;
+  color: #265de0;
 }
 
 .text-emphasis{
@@ -192,12 +198,6 @@ input:focus {
   color: #265de0;
   text-decoration: underline;
   font-size: 1.5em;
-}
-
-#result-text {
-  font-size: 1em;
-  font-family: AvenirNext-Medium;
-  color: #265de0;
 }
 
 #call-box {

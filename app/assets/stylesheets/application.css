@@ -28,7 +28,7 @@
 }
 
 .backgroundAnimated{
-    background-color: #265DE0 !important;
+    background-color: #2e6af7 !important;
     background-image:none !important;
     -webkit-transition: background-color 5000ms linear;
     -moz-transition: background-color 5000ms linear;

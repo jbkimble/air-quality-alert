@@ -27,8 +27,8 @@
   padding-right: 2px;
 }
 
-.backgroundAnimated{
-    background-color: #2e6af7 !important;
+.backgroundColorFlash{
+    background-color: #A3CCFF !important;
     background-image:none !important;
     -webkit-transition: background-color 5000ms linear;
     -moz-transition: background-color 5000ms linear;
@@ -67,16 +67,6 @@
   text-align:center;
  }
 
- /*.close {
-   height: 50%;
-   width: 100%;
-   position:absolute;
-   top: 0;
-   left: 0;
-   z-index: 0;
-   frameborder:0;
- }*/
-
 .top-bar{
   background: #265DE0;
   position: absolute;
@@ -86,6 +76,49 @@
   width: 100%;
   min-height: 102px;
   height: 9.9%;
+}
+
+#logo {
+  font-family: AvenirNext-DemiBold;
+  font-size: .5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin:0px;
+  margin-top: 20px;
+  padding-left:37px;
+}
+
+#header-question {
+  font-family: Shrikhand-Regular;
+  font-size: 2.5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-top: 0px;
+  line-height: 90%;
+  padding-left:35px;
+}
+
+#cancel-button {
+  margin-top: 0px;
+  line-height: 90%;
+  text-decoration: none;
+  margin-right: 35px;
+  padding: 10px 10px 10px 10px;
+  background-color: white;
+  color: #265de0;
+  font-family: AvenirNext-Medium;
+  font-size: 1.1em;
+  border-radius: 19px;
+  cursor:pointer;
+  -webkit-transition: margin-right 1s;
+  margin-top: .2%;
+  display: inline-block;
+  float: right;
+}
+
+#cancel-button:active {
+    background-color: #D8D8D8;
 }
 
 #zipcode-form {
@@ -171,27 +204,6 @@ input:focus {
   frameborder:0;
   -webkit-transition: height 1s; /* Safari */
   transition: height 1s;
-}
-
-#header-question {
-  font-family: Shrikhand-Regular;
-  font-size: 2.5em;
-  color: #FFFFFF;
-  letter-spacing: 2px;
-  display: inline-block;
-  margin-top: 0px;
-  line-height: 90%;
-  padding-left:35px;
-}
-
-#logo {
-  font-family: AvenirNext-DemiBold;
-  font-size: .5em;
-  color: #FFFFFF;
-  letter-spacing: 2px;
-  margin:0px;
-  margin-top: 20px;
-  padding-left:37px;
 }
 
 #emoji-image {
@@ -327,17 +339,4 @@ select {
   padding: 20px;
   z-index: 1;
   position: relative;
-}
-
-#cancel-service {
-  margin-top: 5%;
-  padding: 10px 10px 10px 10px;
-  background-color: #265de0;
-  border: none;
-  color: white;
-  font-family: AvenirNext-Medium;
-  font-size: 1.5em;
-  border-radius: 19px;
-  cursor:pointer;
-  -webkit-transition: margin-right 1s;
 }

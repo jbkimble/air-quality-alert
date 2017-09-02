@@ -1,0 +1,198 @@
+<div id="map-background"></div>
+
+
+<div class="top-bar">
+  <p id="logo">Air-Quality-Alert.net</p>
+  <p id="header-question">What is my air quality?</p>
+  <div id="helpful-phone-flash">
+    <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
+  </div>
+  <%#= link_to "Cancel Alert", "#", id: "cancel-button" %>
+</div>
+
+
+<div id="alert-box">
+  <h1>Enter your phone number to find all your alerts</h1>
+  <div id="phone-form">
+      <%= text_field_tag 'Phone', nil, placeholder: 'Enter Phone', id: 'find-phone-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Phone'", autocomplete:"off" %> <br>
+      <%= submit_tag "Find My Alerts", id:'submit-button', type:'button' %>
+  </div>
+</div>
+
+<aside id="your-alerts">
+  <h1>Here are the alerts we found for <span id="you-phone"></span></h1>
+</aside>
+
+<script>
+var map;
+  function initMap() {
+
+    var styledMapType = new google.maps.StyledMapType(
+      [
+{
+"featureType": "administrative.land_parcel",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "administrative.neighborhood",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.business",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "poi.park",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.arterial",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.highway",
+"elementType": "labels",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "road.local",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+},
+{
+"featureType": "water",
+"elementType": "labels.text",
+"stylers": [
+{
+  "visibility": "off"
+}
+]
+}
+],
+        {name: 'Styled Map'});
+
+    map = new google.maps.Map(document.getElementById('map-background'), {
+      center: {lat: 47.6062, lng: -122.3321},
+      streetViewControl: false,
+      scaleControl: false,
+      draggable: false,
+      zoomControl: false,
+      zoom: 10,
+      mapTypeControlOptions: {
+        mapTypeIds: []
+      }
+    });
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+  }
+
+  $('#your-alerts').hide();
+  $('#helpful-phone-flash').hide();
+
+  $('#find-phone-input').keyup(function(){
+    var regex = /[0-9]|\./;
+    var inputVal = $('#find-phone-input').val()
+    var inputLength = inputVal.length;
+    var keyPressed = event.keyCode
+
+    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $('#find-phone-input').val(inputVal.slice(0, -1));
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+      return false
+    } else if (inputLength > 10) {
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+      $('#find-phone-input').val(inputVal.slice(0, -1));
+      return false
+    }
+  });
+
+  $('#submit-button').click(function(){
+    var number = $('#find-phone-input').serializeArray()[0]["value"];
+    if (number.length != 10) {
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+    } else {
+      submitFormData(number);
+    }
+  });
+
+  function submitFormData(number) {
+    $.ajax({
+      type: "GET",
+      url: "/youralerts",
+      data: {"number": number},
+      dataType: "json",
+      success: function(result) {
+        changeStyles();
+        showResults(result);
+      }
+    });
+  }
+
+  function changeStyles() {
+    $('#map-background').css("height", "0%");
+    $('#your-alerts').slideToggle();
+    $('#alert-box').hide();
+    // $('#find-phone-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
+    // $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
+  }
+
+  function showResults(result){
+    debugger;
+    for (var i = 0; i < result.length; i++) {
+      // found 'x' results for 'phonenumber'
+      // if no alerts flash message and don't apply show Results method
+      result[i].zipcode
+      result[i].air_index.index
+    }
+  }
+
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+</script>

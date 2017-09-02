@@ -20,7 +20,7 @@
 </div>
 
 <aside id="your-alerts">
-  <h1>Here are the alerts we found for <span id="you-phone"></span></h1>
+  <h1>Here are the alerts we found for <span id="your-phone"></span></h1>
 </aside>
 
 <script>
@@ -168,22 +168,22 @@ var map;
       data: {"number": number},
       dataType: "json",
       success: function(result) {
-        changeStyles();
-        showResults(result);
+        showResults(result, number);
       }
     });
   }
 
-  function changeStyles() {
+  function changeStyles(phoneNumber) {
+    $('#alert-box').hide();
     $('#map-background').css("height", "0%");
     $('#your-alerts').slideToggle();
-    $('#alert-box').hide();
+    $('#your-phone').text(phoneNumber);
     // $('#find-phone-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
     // $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
   }
 
-  function showResults(result){
-    debugger;
+  function showResults(result, phoneNumber){
+    changeStyles(phoneNumber);
     for (var i = 0; i < result.length; i++) {
       // found 'x' results for 'phonenumber'
       // if no alerts flash message and don't apply show Results method

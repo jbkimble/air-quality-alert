@@ -11,7 +11,8 @@ describe 'As a signed up user' do
     # create confirmation code object
 
     visit root_path
-    click_link "Cancel Alerts"
+    click_on "cancel-button"
+    expect(current_path).to eq(alert_index_path)
     expect(page).to have_content("Enter your phone number to cancel your alerts")
     fill_in "Phone Number", with: "1231231234"
     click_button('Find My Alerts')

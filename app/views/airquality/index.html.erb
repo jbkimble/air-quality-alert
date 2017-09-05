@@ -159,21 +159,4 @@
     checkInput("#phone-input", 10, '#helpful-phone-flash')
   });
 
-  function checkInput(buttonClicked, properInputLength, flashMessage) {
-    var regex = /[0-9]|\./;
-    var inputVal = $(buttonClicked).val()
-    var inputLength = inputVal.length;
-    var keyPressed = event.keyCode
-
-    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
-      $(buttonClicked).val(inputVal.slice(0, -1));
-      $(flashMessage).slideDown("slow").fadeOut(5000);
-      return false
-    } else if (inputLength > properInputLength) {
-      $(flashMessage).slideDown("slow").fadeOut(5000);
-      $(buttonClicked).val(inputVal.slice(0, -1));
-      return false
-    }
-  }
-
 </script>

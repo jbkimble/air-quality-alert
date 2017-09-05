@@ -19,7 +19,8 @@ class AlertController < ApplicationController
 
   def destroy
     alert = Alert.find(alert_params["id"])
-    alert.destroy
+    alert.active = false
+    alert.save
     flash[:success] = 'Successfully ended alert!'
     redirect_to root_path
   end

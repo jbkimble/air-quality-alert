@@ -2,7 +2,8 @@
 
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
-  <p id="header-question">What is my air quality?</p>
+  <!-- <p id="header-question">What is my air quality?</p> -->
+  <a id ="header-question" href="/">What is my air quality?</a>
   <%= link_to "Cancel Alert", alert_index_path, id: "cancel-button" %>
   <div id="helpful-flash" class="flash-message">
     <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
@@ -165,6 +166,7 @@ var map;
   }
 
   function updatePageStyle() {
+    $('#cancel-button').fadeOut(200);
     $('#map-background').css("height", "40%");
     $('.results-box').slideToggle();
     $('#zipcode-form').css({"width":"100%","margin-top":"5em","margin-left":"","margin-right":"", "text-align":""});
@@ -223,17 +225,20 @@ var map;
     var alertAQI = $('#drp-btn option:selected').text()
     var phoneNumber = $('#phone-input').val()
     var zipcode = $("#city-zip").html()
-
-    $.ajax({
-      type: "POST",
-      url: "/alert",
-      data: {"zipcode": zipcode, "phone": phoneNumber, "alert_level": alertAQI, "active": true },
-      dataType: "json",
-      success: function(result) {
-        var path = 'http://localhost:3000/alert/' + result["id"]
-        window.location = path
-      }
-    });
+    if (phoneNumber.length != 10) {
+      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "/alert",
+        data: {"zipcode": zipcode, "phone": phoneNumber, "alert_level": alertAQI, "active": true },
+        dataType: "json",
+        success: function(result) {
+          var path = 'http://localhost:3000/alert/' + result["id"]
+          window.location = path
+        }
+      });
+    }
   })
 
   function highlightFlash() {

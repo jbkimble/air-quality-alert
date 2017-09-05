@@ -120,6 +120,11 @@
   margin-top: 0px;
   line-height: 90%;
   padding-left:35px;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  text-decoration: none;
 }
 
 #cancel-button {

@@ -1,5 +1,5 @@
 class Alert < ApplicationRecord
-  validates :active, :phone, :air_index_id, :zipcode, presence: true
-
+  validates :phone, :air_index_id, :zipcode, presence: true
+  validates_inclusion_of :active, :in => [true, false]
   belongs_to :air_index
 end

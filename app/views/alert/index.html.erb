@@ -19,127 +19,18 @@
 <div id="alert-box">
   <h1>Enter your phone number to find all your alerts</h1>
   <div id="phone-form">
-      <%= text_field_tag 'Phone', nil, placeholder: 'Enter Phone', id: 'find-phone-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Phone'", autocomplete:"off" %> <br>
-      <%= submit_tag "Find My Alerts", id:'submit-button', type:'button' %>
+    <%= text_field_tag 'Phone', nil, placeholder: 'Enter Phone', id: 'find-phone-input', onfocus: "this.placeholder = ''", onBlur: "this.placeholder = 'Enter Phone'", autocomplete:"off" %> <br>
+    <%= submit_tag "Find My Alerts", id:'submit-button', type:'button' %>
   </div>
 </div>
 
 <div id="your-alerts">
   <h1 class="font-style">Here are the alerts we found for <span id="your-phone"></span></h1>
   <div id="the-alerts">
-
   </div>
 </div>
 
 <script>
-var map;
-  function initMap() {
-
-    var styledMapType = new google.maps.StyledMapType(
-      [
-{
-"featureType": "administrative.land_parcel",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "administrative.neighborhood",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi.business",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "poi.park",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road",
-"elementType": "labels",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.arterial",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.highway",
-"elementType": "labels",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "road.local",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-},
-{
-"featureType": "water",
-"elementType": "labels.text",
-"stylers": [
-{
-  "visibility": "off"
-}
-]
-}
-],
-        {name: 'Styled Map'});
-
-    map = new google.maps.Map(document.getElementById('map-background'), {
-      center: {lat: 47.6062, lng: -122.3321},
-      streetViewControl: false,
-      scaleControl: false,
-      draggable: false,
-      zoomControl: false,
-      zoom: 10,
-      mapTypeControlOptions: {
-        mapTypeIds: []
-      }
-    });
-    map.mapTypes.set('styled_map', styledMapType);
-    map.setMapTypeId('styled_map');
-  }
-
   $('#your-alerts').hide();
   $('#helpful-phone-flash').hide();
   $('#no-alerts-flash').hide();
@@ -233,7 +124,4 @@ var map;
     }
   }
 
-</script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
 </script>

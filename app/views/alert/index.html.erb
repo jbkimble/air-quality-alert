@@ -1,14 +1,13 @@
 <div id="map-background"></div>
 
-
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
   <a id ="header-question" href="/">What is my air quality?</a>
   <div id="helpful-phone-flash" class="flash-message">
-    <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
+    <h2 id="flash-text">Please enter a 10 digit phone number containing only numbers</h2>
   </div>
   <div class="flash-message" id="no-alerts-flash">
-    <h2 id="phone-flash-text">No alerts found for <span id="alert-number"></span></h2>
+    <h2 id="flash-text">No alerts found for <span id="alert-number"></span></h2>
   </div>
   <div id="success-flash" class="flash-message">
     <h2 id="flash-text"> Successfully canceled alert! </h2>
@@ -37,20 +36,7 @@
   $('#success-flash').hide();
 
   $('#find-phone-input').keyup(function(){
-    var regex = /[0-9]|\./;
-    var inputVal = $('#find-phone-input').val()
-    var inputLength = inputVal.length;
-    var keyPressed = event.keyCode
-
-    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
-      $('#find-phone-input').val(inputVal.slice(0, -1));
-      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
-      return false
-    } else if (inputLength > 10) {
-      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
-      $('#find-phone-input').val(inputVal.slice(0, -1));
-      return false
-    }
+    checkInput("#find-phone-input", 10, '#helpful-phone-flash')
   });
 
   $('#submit-button').click(function(){
@@ -92,18 +78,11 @@
     $('#alert-box').hide();
     recenterMap();
     $('#map-background').css("height", "20%");
-    $('#your-alerts').slideToggle()
-
-    $('#your-phone').text(phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10));
+    $('#your-phone').text(stylePhoneNumber(phoneNumber));
   }
 
-  function subtleChangeStyles(phoneNumber) {
-    $('#alert-box').hide();
-    recenterMap();
-    $('#map-background').css("height", "20%");
-    $('#your-alerts').show()
-
-    $('#your-phone').text(phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10));
+  function stylePhoneNumber(phoneNumber) {
+    return phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10);
   }
 
   function recenterMap() {
@@ -112,9 +91,11 @@
 
   function showResults(result, phoneNumber, sentFrom){
     if (sentFrom == "re-render") {
-      subtleChangeStyles(phoneNumber);
+      $('#your-alerts').show()
+      changeStyles(phoneNumber);
     } else {
       changeStyles(phoneNumber);
+      $('#your-alerts').slideToggle()
     }
 
     for (var i = 0; i < result.length; i++) {

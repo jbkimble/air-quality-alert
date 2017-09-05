@@ -236,6 +236,9 @@ var map;
         success: function(result) {
           var path = 'http://localhost:3000/alert/' + result["id"]
           window.location = path
+        },
+        error: function(data){
+          $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
         }
       });
     }
@@ -265,7 +268,10 @@ var map;
           updatePageStyle();
           updatedBefore = true;
         }
-      }
+      },
+      error: function(data){
+        $('#helpful-flash').slideDown("slow").fadeOut(5000);
+    }
     });
   }
 
@@ -275,7 +281,7 @@ var map;
                       "Very Unhealthy": "very_unhealthy.png", "Hazardous": "hazardous.png"}
     return imageStore[rating];
   }
-  debugger;
+
   show_generic_flash();
   function show_generic_flash() {
     $('#generic-flash').slideDown("slow").fadeOut(5000);

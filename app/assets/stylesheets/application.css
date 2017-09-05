@@ -360,12 +360,6 @@ input:focus {
   color: #265DE0;
 }
 
-#phone-flash-text {
-  line-height:50px;
-  font-family: AvenirNext-Bold;
-  color: #265DE0;
-}
-
 button {
   padding: 10px 10px 10px 10px;
   background-color: white;

@@ -2,20 +2,19 @@
 
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
-  <!-- <p id="header-question">What is my air quality?</p> -->
   <a id ="header-question" href="/">What is my air quality?</a>
   <%= link_to "Cancel Alert", alert_index_path, id: "cancel-button" %>
-  <div id="helpful-flash" class="flash-message">
-    <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
-  </div>
-  <div id="helpful-phone-flash" class="flash-message">
-    <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
-  </div>
-  <% if flash.any?%>
-  <div id="generic-flash" class="flash-message">
-      <h2 id="flash-text"> <%= flash["success"] %> </h2>
-  </div>
-  <% end %>
+    <div id="helpful-flash" class="flash-message">
+      <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
+    </div>
+    <div id="helpful-phone-flash" class="flash-message">
+      <h2 id="flash-text">Please enter a 10 valid digit phone number containing only numbers</h2>
+    </div>
+    <% if flash.any?%>
+      <div id="generic-flash" class="flash-message">
+        <h2 id="flash-text"> <%= flash["success"] %> </h2>
+      </div>
+    <% end %>
 </div>
 
 <div id="zipcode-form">
@@ -29,12 +28,9 @@
       <p>The Air Quality in  <span class="text-emphasis" id="city-country"> </span> is
         <span class="text-emphasis" id="rating"> </span></p>
     </div>
-
     <div id="call-box">
       <p id="sales-copy">Get FREE Updates When The Air Quality In Your Area Reaches <span id="dangerous"> Dangerous  </span> Levels</p>
-
       <p id="call-to-action"> Text me at <span id="phone"></span> if the air quality in <span id='city-zip'></span> is <span id="drp-btn"></span> <span id="sbmt-text-info"> </span></p>
-
     </div>
 </aside>
 
@@ -152,18 +148,12 @@ var map;
   $('#helpful-phone-flash').hide();
   $('#generic-flash').hide();
 
-  $('#submit-button').click(function(){
-    var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
-    if (zipcode.length != 5) {
-      $('#helpful-flash').slideDown("slow").fadeOut(5000);
-    } else {
-      submitFormData(zipcode);
-    }
-  });
-
-  function recenterMap() {
-    map.setCenter({lat: 47.45, lng: -122.3321});
+  show_generic_flash();
+  function show_generic_flash() {
+    $('#generic-flash').slideDown("slow").fadeOut(5000);
   }
+
+  var updatedBefore = false;
 
   function updatePageStyle() {
     $('#cancel-button').fadeOut(200);
@@ -174,33 +164,9 @@ var map;
     $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
   }
 
-  var updatedBefore = false;
-  //
-  // function submitFormData(zipcode) {
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "/airquality",
-  //     data: {"zipcode": zipcode},
-  //     dataType: "json",
-  //     success: function(result) {
-  //       $('#city-country').text(`${result["city"]}, ${result["country"]}`);
-  //       $('#city-zip').text(`${result["zipcode"]}`);
-  //       $('#rating').text(result["rating"]);
-  //       debugger;
-  //       $('#image-span').append(
-  //         "<img id='emoji-image' src='/assets/' + get_smiley_path()>"
-  //       )
-  //       if (updatedBefore) {
-  //
-  //       } else {
-  //         recenterMap();
-  //         updatePageStyle();
-  //         updatedBefore = true;
-  //       }
-  //       // applyEmoji();
-  //     }
-  //   });
-  // }
+  function recenterMap() {
+    map.setCenter({lat: 47.45, lng: -122.3321});
+  }
 
   $('#phone').append(
     $('<input/>').attr("placeholder", "555-555-5555").attr("id", "phone-input")
@@ -221,6 +187,20 @@ var map;
     $('<button>').html('Submit')
   )
 
+  function get_smiley_path(rating) {
+    var imageStore = {"Good": "good.png", "Moderate": "moderate.png",
+                      "Unhealthy for Sensitive Groups": "sensitive.png", "Unhealthy": 'unhealthy.png',
+                      "Very Unhealthy": "very_unhealthy.png", "Hazardous": "hazardous.png"}
+    return imageStore[rating];
+  }
+
+  function highlightFlash() {
+    $('.results-box').addClass('backgroundColorFlash')
+    setTimeout(function () {
+      $('.results-box').removeClass('backgroundColorFlash');
+    }, 380);
+  }
+
   $('#sbmt-text-info').click(function(){
     var alertAQI = $('#drp-btn option:selected').text()
     var phoneNumber = $('#phone-input').val()
@@ -235,6 +215,7 @@ var map;
         dataType: "json",
         success: function(result) {
           var path = 'http://localhost:3000/alert/' + result["id"]
+          // var path = 'https://air-quality-alert.herokuapp.com/alert/' + result["id"]
           window.location = path
         },
         error: function(data){
@@ -244,12 +225,14 @@ var map;
     }
   })
 
-  function highlightFlash() {
-    $('.results-box').addClass('backgroundColorFlash')
-    setTimeout(function () {
-      $('.results-box').removeClass('backgroundColorFlash');
-    }, 380);
-  }
+  $('#submit-button').click(function(){
+    var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
+    if (zipcode.length != 5) {
+      $('#helpful-flash').slideDown("slow").fadeOut(5000);
+    } else {
+      submitFormData(zipcode);
+    }
+  });
 
   function submitFormData(zipcode) {
     $.ajax({
@@ -275,54 +258,32 @@ var map;
     });
   }
 
-  function get_smiley_path(rating) {
-    var imageStore = {"Good": "good.png", "Moderate": "moderate.png",
-                      "Unhealthy for Sensitive Groups": "sensitive.png", "Unhealthy": 'unhealthy.png',
-                      "Very Unhealthy": "very_unhealthy.png", "Hazardous": "hazardous.png"}
-    return imageStore[rating];
-  }
-
-  show_generic_flash();
-  function show_generic_flash() {
-    $('#generic-flash').slideDown("slow").fadeOut(5000);
-  }
-
-
   $('#zipcode-form').keyup(function(){
-    var regex = /[0-9]|\./;
-    var inputVal = $('#zipcode-input').val()
-    var inputLength = inputVal.length;
-    var keyPressed = event.keyCode
-
-    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
-      $('#zipcode-input').val(inputVal.slice(0, -1));
-      $('#helpful-flash').slideDown("slow").fadeOut(5000);
-      return false
-    } else if (inputLength > 5) {
-      $('#helpful-flash').slideDown("slow").fadeOut(5000);
-      $('#zipcode-input').val(inputVal.slice(0, -1));
-      return false
-    }
+    checkInput("#zipcode-input", 5, '#helpful-flash')
   });
 
   $('#phone-input').keyup(function(){
+    checkInput("#phone-input", 10, '#helpful-phone-flash')
+  });
+
+  function checkInput(buttonClicked, properInputLength, flashMessage) {
     var regex = /[0-9]|\./;
-    var inputVal = $('#phone-input').val()
+    var inputVal = $(buttonClicked).val()
     var inputLength = inputVal.length;
     var keyPressed = event.keyCode
 
     if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
-      $('#phone-input').val(inputVal.slice(0, -1));
-      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
+      $(buttonClicked).val(inputVal.slice(0, -1));
+      $(flashMessage).slideDown("slow").fadeOut(5000);
       return false
-    } else if (inputLength > 10) {
-      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
-      $('#phone-input').val(inputVal.slice(0, -1));
+    } else if (inputLength > properInputLength) {
+      $(flashMessage).slideDown("slow").fadeOut(5000);
+      $(buttonClicked).val(inputVal.slice(0, -1));
       return false
     }
-  });
+  }
 
 </script>
 <script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
 </script>

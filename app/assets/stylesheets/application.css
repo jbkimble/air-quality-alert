@@ -339,17 +339,7 @@ input:focus {
   text-align: center;
 }
 
-#helpful-flash {
-  margin-top: -2%;
-  /*background-color: #9efffd;*/
-  background-color: white;
-  z-index:1;
-  height:50%;
-  width:100%;
-  text-align: center;
-}
-
-#helpful-phone-flash {
+.flash-message {
   margin-top: -2%;
   /*background-color: #9efffd;*/
   background-color: white;

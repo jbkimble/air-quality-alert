@@ -20,6 +20,10 @@
      background-color: #F1EFE9;
  }
 
+ #delete-form {
+     display: inline-block;
+ }
+
 .underline {
   text-decoration: underline;
   font-size: 1.5em;
@@ -65,6 +69,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  height:80%;
   left:0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -264,6 +269,18 @@ input:focus {
   color: #265de0;
 }
 
+.font-style {
+  font-family: AvenirNext-Medium;
+  color: #265de0;
+}
+
+.mild-emphasis{
+  font-family: AvenirNext-Bold;
+  color: #265de0;
+  font-size: 1.3em;
+  /*background-color: #D8D8D8;*/
+}
+
 .text-emphasis{
   font-family: AvenirNext-DemiBold;
   color: #265de0;
@@ -286,6 +303,10 @@ input:focus {
   font-size: 1em;
   color: #D8D8D8;
   letter-spacing: 0;
+}
+
+.margin-bottom-10 {
+  margin-bottom:10px;
 }
 
 #call-to-action {
@@ -365,7 +386,7 @@ button {
 }
 
 button:active {
-  background-color: blue;
+  background-color: #D8D8D8;
 }
 
 select {

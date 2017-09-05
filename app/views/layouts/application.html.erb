@@ -121,9 +121,27 @@
       map.mapTypes.set('styled_map', styledMapType);
       map.setMapTypeId('styled_map');
     }
-  </script>
 
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
-  </script>
+
+  function checkInput(buttonClicked, properInputLength, flashMessage) {
+    var regex = /[0-9]|\./;
+    var inputVal = $(buttonClicked).val()
+    var inputLength = inputVal.length;
+    var keyPressed = event.keyCode
+
+    if (!regex.test(event.key) && keyPressed != 8 && keyPressed != 13 && keyPressed != 46 && keyPressed != 13) {
+      $(buttonClicked).val(inputVal.slice(0, -1));
+      $(flashMessage).slideDown("slow").fadeOut(5000);
+      return false
+    } else if (inputLength > properInputLength) {
+      $(flashMessage).slideDown("slow").fadeOut(5000);
+      $(buttonClicked).val(inputVal.slice(0, -1));
+      return false
+    }
+  }
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjydTLy1DwBK6nEEeVhmzhGnyAcTUnMoY&callback=initMap">
+</script>
 </html>

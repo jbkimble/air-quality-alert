@@ -345,7 +345,7 @@ input:focus {
 }
 
 .flash-message {
-  margin-top: -2%;
+  margin-top: 3%;
   /*background-color: #9efffd;*/
   background-color: white;
   z-index:1;

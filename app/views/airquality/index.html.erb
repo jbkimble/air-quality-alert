@@ -4,12 +4,17 @@
   <p id="logo">Air-Quality-Alert.net</p>
   <p id="header-question">What is my air quality?</p>
   <%= link_to "Cancel Alert", alert_index_path, id: "cancel-button" %>
-  <div id="helpful-flash">
+  <div id="helpful-flash" class="flash-message">
     <h2 id="flash-text">Please enter a valid 5 digit zipcode</h2>
   </div>
-  <div id="helpful-phone-flash">
+  <div id="helpful-phone-flash" class="flash-message">
     <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
   </div>
+  <% if flash.any?%>
+  <div id="generic-flash" class="flash-message">
+      <h2 id="flash-text"> <%= flash["success"] %> </h2>
+  </div>
+  <% end %>
 </div>
 
 <div id="zipcode-form">
@@ -144,6 +149,7 @@ var map;
   $('.results-box').hide();
   $('#helpful-flash').hide();
   $('#helpful-phone-flash').hide();
+  $('#generic-flash').hide();
 
   $('#submit-button').click(function(){
     var zipcode = $('#zipcode-input').serializeArray()[0]["value"];
@@ -263,6 +269,11 @@ var map;
                       "Unhealthy for Sensitive Groups": "sensitive.png", "Unhealthy": 'unhealthy.png',
                       "Very Unhealthy": "very_unhealthy.png", "Hazardous": "hazardous.png"}
     return imageStore[rating];
+  }
+  debugger;
+  show_generic_flash();
+  function show_generic_flash() {
+    $('#generic-flash').slideDown("slow").fadeOut(5000);
   }
 
 

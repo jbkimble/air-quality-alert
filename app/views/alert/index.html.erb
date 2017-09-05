@@ -19,9 +19,12 @@
   </div>
 </div>
 
-<aside id="your-alerts">
-  <h1>Here are the alerts we found for <span id="your-phone"></span></h1>
-</aside>
+<div id="your-alerts">
+  <h1 class="font-style">Here are the alerts we found for <span id="your-phone"></span></h1>
+  <div id="the-alerts">
+
+  </div>
+</div>
 
 <script>
 var map;
@@ -175,20 +178,26 @@ var map;
 
   function changeStyles(phoneNumber) {
     $('#alert-box').hide();
-    $('#map-background').css("height", "0%");
+    recenterMap();
+    $('#map-background').css("height", "20%");
     $('#your-alerts').slideToggle();
-    $('#your-phone').text(phoneNumber);
+    $('#your-phone').text(phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10));
     // $('#find-phone-input').css({"width":"50%","float":"left", "margin-left": "10%", "margin-top": "5%"});
     // $('#submit-button').css({"margin-top":"","margin-right":"15%","float":"right"});
+  }
+
+  function recenterMap() {
+    map.setCenter({lat: 47.45, lng: -122.3321});
   }
 
   function showResults(result, phoneNumber){
     changeStyles(phoneNumber);
     for (var i = 0; i < result.length; i++) {
-      // found 'x' results for 'phonenumber'
       // if no alerts flash message and don't apply show Results method
-      result[i].zipcode
-      result[i].air_index.index
+      var myAuthToken = "<%= form_authenticity_token %>"
+      var delete_button = `<form class="button_to" method="post" action="/alert/${result[i].id}"><input type="hidden" name="_method" value="delete"><input id="cancel-service" class="margin-bottom-10" type="submit" value="Cancel Alert"> <input type="hidden" name="authenticity_token" value="${myAuthToken}">  </form>`
+
+      $("#the-alerts").append(`<h2 class="font-style">Alert ${i+1}: Alert when <span class="mild-emphasis">${result[i].air_index.index}</span> in <span class="mild-emphasis">${result[i].zipcode}</span> <span id="delete-form"> ${delete_button} </span> <h2>`);
     }
   }
 

@@ -19,10 +19,15 @@ class AlertController < ApplicationController
 
   def destroy
     alert = Alert.find(alert_params["id"])
+    user_alerts = Alert.where(phone: alert.phone, active: true)
     alert.active = false
     alert.save
-    flash[:success] = 'Successfully canceled alert!'
-    redirect_to root_path
+    if user_alerts.empty?
+      flash[:success] = 'Successfully canceled alert!'
+      redirect_to root_path
+    else
+      redirect_to alert_index_path(phone: alert.phone)
+    end
   end
 
   private

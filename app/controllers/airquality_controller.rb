@@ -14,7 +14,6 @@ class AirqualityController < ApplicationController
         format.json { render json: result_hash.to_json, :status => :ok}
       end
     else
-      # descriptive flash message
     end
   end
 

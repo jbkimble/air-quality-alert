@@ -3,13 +3,15 @@
 
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
-  <!-- <p id="header-question">What is my air quality?</p> -->
   <a id ="header-question" href="/">What is my air quality?</a>
   <div id="helpful-phone-flash" class="flash-message">
     <h2 id="phone-flash-text">Please enter a 10 digit phone number containing only numbers</h2>
   </div>
   <div class="flash-message" id="no-alerts-flash">
     <h2 id="phone-flash-text">No alerts found for <span id="alert-number"></span></h2>
+  </div>
+  <div id="success-flash" class="flash-message">
+    <h2 id="flash-text"> Successfully canceled alert! </h2>
   </div>
 </div>
 
@@ -141,6 +143,7 @@ var map;
   $('#your-alerts').hide();
   $('#helpful-phone-flash').hide();
   $('#no-alerts-flash').hide();
+  $('#success-flash').hide();
 
   $('#find-phone-input').keyup(function(){
     var regex = /[0-9]|\./;
@@ -164,11 +167,11 @@ var map;
     if (number.length != 10) {
       $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
     } else {
-      submitFormData(number);
+      submitFormData(number, "NOT-re-render");
     }
   });
 
-  function submitFormData(number) {
+  function submitFormData(number, sentFrom) {
     $.ajax({
       type: "GET",
       url: "/youralerts",
@@ -179,10 +182,19 @@ var map;
           $('#alert-number').text(number.substring(0,3) + "-" + number.substring(3,6) + "-" + number.substring(6,10));
           $('#no-alerts-flash').slideDown("slow").fadeOut(5000);
         } else {
-          showResults(result, number);
+          showResults(result, number, sentFrom);
         }
       }
     });
+  }
+
+  autoSeachNumber();
+  function autoSeachNumber() {
+    var phone = window.location.search.split('?')[1] ? window.location.search.split('=')[1] : 0;
+    if (phone != 0) {
+      submitFormData(phone, "re-render")
+      $('#success-flash').slideDown("slow").fadeOut(5000);
+    }
   }
 
   function changeStyles(phoneNumber) {
@@ -194,15 +206,29 @@ var map;
     $('#your-phone').text(phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10));
   }
 
+  function subtleChangeStyles(phoneNumber) {
+    $('#alert-box').hide();
+    recenterMap();
+    $('#map-background').css("height", "20%");
+    $('#your-alerts').show()
+
+    $('#your-phone').text(phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10));
+  }
+
   function recenterMap() {
     map.setCenter({lat: 47.45, lng: -122.3321});
   }
 
-  function showResults(result, phoneNumber){
-    changeStyles(phoneNumber);
+  function showResults(result, phoneNumber, sentFrom){
+    if (sentFrom == "re-render") {
+      subtleChangeStyles(phoneNumber);
+    } else {
+      changeStyles(phoneNumber);
+    }
+
     for (var i = 0; i < result.length; i++) {
       var myAuthToken = "<%= form_authenticity_token %>"
-      var delete_button = `<form class="button_to" method="post" action="/alert/${result[i].id}"><input type="hidden" name="_method" value="delete"><input id="cancel-service" class="margin-bottom-10" type="submit" value="Cancel Alert"> <input type="hidden" name="authenticity_token" value="${myAuthToken}">  </form>`
+      var delete_button = `<form class="button_to" method="post" action="/alert/${result[i].id}"><input type="hidden" name="_method" value="delete"><input id="cancel-service" class="margin-bottom-10" type="submit" value="Cancel Alert"> <input type="hidden" name="authenticity_token" value="${myAuthToken}"> </form>`
       $("#the-alerts").append(`<h2 class="font-style">Alert ${i+1}: Alert when air quality is <span class="mild-emphasis">${result[i].air_index.index}</span> in <span class="mild-emphasis">${result[i].zipcode}</span> <span id="delete-form"> ${delete_button} </span> <h2>`);
     }
   }

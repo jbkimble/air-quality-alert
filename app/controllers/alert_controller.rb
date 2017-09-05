@@ -21,7 +21,7 @@ class AlertController < ApplicationController
     alert = Alert.find(alert_params["id"])
     alert.active = false
     alert.save
-    flash[:success] = 'Successfully ended alert!'
+    flash[:success] = 'Successfully canceled alert!'
     redirect_to root_path
   end
 

@@ -3,12 +3,11 @@
 <div class="top-bar">
   <p id="logo">Air-Quality-Alert.net</p>
   <a id ="header-question" href="/">What is my air quality?</a>
-  <!-- <p id="header-question">What is my air quality?</p> -->
 </div>
 
 <div id="alert-box">
   <h1>Alert Successfully Set!</h1>
-  <h3>We'll send a text to <%= @alert.phone %></h3>
+  <h3>We'll send a text to <%= @alert.styled_number %></h3>
   <h3>When the air quality in <%= @alert.zipcode %> </h3>
   <h3>Is at or below the US governments '<%= @alert.air_index.index %>' designation </h3>
   <h5>Sending a welcome text now to confirm we have the right number one file</h5>
@@ -126,14 +125,12 @@ var map;
   }
 
   $('#cancel-service').click(function(){
-    debugger;
     $.ajax({
       type: "POST",
       url: "/alert",
       data: {},
       dataType: "json",
       success: function(result) {
-        console.log("success")
       }
     });
   })

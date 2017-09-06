@@ -215,7 +215,6 @@ a:link, a:visited {
   border-radius: 19px;
   cursor:pointer;
   -webkit-transition: margin-right 1s;
-  /*overflow-x: visible;*/
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -283,7 +282,6 @@ input:focus {
   font-family: AvenirNext-Bold;
   color: #265de0;
   font-size: 1.3em;
-  /*background-color: #D8D8D8;*/
 }
 
 .text-emphasis{
@@ -300,7 +298,6 @@ input:focus {
   position: fixed;
   bottom: 0;
   width: 100%;
-  /*overflow: scroll;*/
 }
 
 #sales-copy {
@@ -346,7 +343,6 @@ input:focus {
 
 .flash-message {
   margin-top: 3%;
-  /*background-color: #9efffd;*/
   background-color: white;
   z-index:1;
   height:50%;
@@ -371,7 +367,6 @@ button {
   border-radius: 19px;
   cursor:pointer;
   -webkit-transition: margin-right 1s;
-  /*overflow-x: visible;*/
 }
 
 button:active {

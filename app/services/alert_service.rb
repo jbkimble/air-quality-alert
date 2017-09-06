@@ -5,8 +5,6 @@ class AlertService
     todays_rating_by_zip = []
     unique_zipcodes.each do |zipcode|
       zipcode_air_data = AirDataService.new.get_air_quality(zipcode)
-      todays_air_rating = WeatherPoint.get_us_rating(zipcode_air_data[:us_aqi].to_i)
-      zipcode_air_data[:air_index_id] = todays_air_rating
       WeatherPoint.create(zipcode_air_data)
       todays_rating_by_zip << [zipcode, todays_air_rating]
     end
@@ -19,4 +17,5 @@ class AlertService
       end
     end
   end
+
 end

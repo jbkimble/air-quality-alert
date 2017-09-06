@@ -23,7 +23,7 @@ class AlertController < ApplicationController
     alert.active = false
     alert.save
     if user_alerts.empty?
-      flash[:success] = 'Successfully canceled alert!'
+      flash[:success] = 'Successfully canceled all alerts!'
       redirect_to root_path
     else
       redirect_to alert_index_path(phone: alert.phone)

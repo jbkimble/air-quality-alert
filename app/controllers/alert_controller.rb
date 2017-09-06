@@ -19,9 +19,9 @@ class AlertController < ApplicationController
 
   def destroy
     alert = Alert.find(alert_params["id"])
-    user_alerts = Alert.where(phone: alert.phone, active: true)
     alert.active = false
     alert.save
+    user_alerts = Alert.where(phone: alert.phone, active: true)
     if user_alerts.empty?
       flash[:success] = 'Successfully canceled all alerts!'
       redirect_to root_path
@@ -32,24 +32,7 @@ class AlertController < ApplicationController
 
   private
     def alert_params
-      params[:air_index_id] = return_index_id(params[:alert_level])
+      params[:air_index_id] = AirIndex.find_by(index: params[:alert_level]).id if params[:alert_level]
       params.permit(:phone, :air_index_id, :zipcode, :active, :id)
-    end
-
-    def return_index_id(alert_level)
-      case alert_level
-      when "Good"
-        return 1
-      when "Moderate"
-        return 2
-      when "Unhealthy For Sensitive Groups"
-        return 3
-      when "Unhealthy"
-        return 4
-      when "Very Unhealthy"
-        return 5
-      when "Hazardous"
-        return 6
-      end
     end
 end

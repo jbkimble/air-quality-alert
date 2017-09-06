@@ -24,7 +24,7 @@
 </div>
 
 <div id="your-alerts">
-  <h1 class="font-style">Here are the alerts we found for <span id="your-phone"></span></h1>
+  <h1 class="font-style">Alerts for <span id="your-phone"></span></h1>
   <div id="the-alerts">
   </div>
 </div>
@@ -35,17 +35,21 @@
   $('#no-alerts-flash').hide();
   $('#success-flash').hide();
 
+  function recenterMap() {
+    map.setCenter({lat: 47.45, lng: -122.3321});
+  }
+
+  function stylePhoneNumber(phoneNumber) {
+    return phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10);
+  }
+
   $('#find-phone-input').keyup(function(){
     checkInput("#find-phone-input", 10, '#helpful-phone-flash')
   });
 
   $('#submit-button').click(function(){
     var number = $('#find-phone-input').serializeArray()[0]["value"];
-    if (number.length != 10) {
-      $('#helpful-phone-flash').slideDown("slow").fadeOut(5000);
-    } else {
       submitFormData(number, "NOT-re-render");
-    }
   });
 
   function submitFormData(number, sentFrom) {
@@ -56,7 +60,7 @@
       dataType: "json",
       success: function(result) {
         if (result.length == 0) {
-          $('#alert-number').text(number.substring(0,3) + "-" + number.substring(3,6) + "-" + number.substring(6,10));
+          $('#alert-number').text(stylePhoneNumber(number));
           $('#no-alerts-flash').slideDown("slow").fadeOut(5000);
         } else {
           showResults(result, number, sentFrom);
@@ -65,8 +69,8 @@
     });
   }
 
-  autoSeachNumber();
-  function autoSeachNumber() {
+  autoSearchNumber();
+  function autoSearchNumber() {
     var phone = window.location.search.split('?')[1] ? window.location.search.split('=')[1] : 0;
     if (phone != 0) {
       submitFormData(phone, "re-render")
@@ -81,14 +85,6 @@
     $('#your-phone').text(stylePhoneNumber(phoneNumber));
   }
 
-  function stylePhoneNumber(phoneNumber) {
-    return phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6,10);
-  }
-
-  function recenterMap() {
-    map.setCenter({lat: 47.45, lng: -122.3321});
-  }
-
   function showResults(result, phoneNumber, sentFrom){
     if (sentFrom == "re-render") {
       $('#your-alerts').show()
@@ -97,7 +93,10 @@
       changeStyles(phoneNumber);
       $('#your-alerts').slideToggle()
     }
+    appendAlerts(result)
+  }
 
+  function appendAlerts(result) {
     for (var i = 0; i < result.length; i++) {
       var myAuthToken = "<%= form_authenticity_token %>"
       var delete_button = `<form class="button_to" method="post" action="/alert/${result[i].id}"><input type="hidden" name="_method" value="delete"><input id="cancel-service" class="margin-bottom-10" type="submit" value="Cancel Alert"> <input type="hidden" name="authenticity_token" value="${myAuthToken}"> </form>`

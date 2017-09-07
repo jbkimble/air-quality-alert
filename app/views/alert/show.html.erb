@@ -6,13 +6,20 @@
 </div>
 
 <div id="alert-box">
-  <h1>Alert Successfully Set!</h1>
-  <h3>We'll send a text to <%= @alert.styled_number %></h3>
-  <h3>When the air quality in <%= @alert.zipcode %> </h3>
-  <h3>Is at or below the US governments '<%= @alert.air_index.index %>' designation </h3>
-  <h5>Sending a welcome text now to confirm we have the right number one file</h5>
-  <h1>Thanks for using air quality alert!</h1>
-  <%= button_to "Cancel Alert", alert_path(:id => @alert.id), :method => :delete, id: "cancel-service"  %>
+  <% if @alert.active %>
+    <h1>Alert Successfully Set!</h1>
+    <h3>We'll send a text to <%= @alert.styled_number %></h3>
+    <h3>When the air quality in <%= @alert.zipcode %> </h3>
+    <h3>Is at or below the US governments '<%= @alert.air_index.index %>' designation </h3>
+    <h5>Sending a welcome text now to confirm we have the right number one file</h5>
+    <h1>Thanks for using air quality alert!</h1>
+    <%= button_to "Cancel Alert", alert_path(:id => @alert.id), :method => :delete, id: "cancel-service"  %>
+  <% else %>
+  <br>
+    <h1>This Alert has been canceled!</h1>
+    <%= button_to  "Set Another Alert", root_path, :method => :get, id:'submit-button', type:'button' %>
+    <br>
+    <% end %>
 </div>
 
 <script>

@@ -10,11 +10,11 @@ During this time many people engaged in activities which put them at risk becaus
 # Built With
 Ruby on Rails, Twilio, Vanilla JS, and T.D.D. with RSpec/Capybara
 
-# How To Run
-* Coming soon: This section will be added when the app has more features ...
-
 # Process
 Below are the original moc ups
-<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_homepage.png" height="500" />
+<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_homepage.png" height="200" />
 
-<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="500" />
+<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="200" />
+
+# How To Run
+* Coming soon: This section will be added when the app has more features ...

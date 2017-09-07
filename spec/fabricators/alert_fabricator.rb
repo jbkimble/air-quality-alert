@@ -1,6 +1,6 @@
-# Fabricator(:alert) do
-#   active false
-#   phone "MyString"
-#   alert-level "MyString"
-#   zipcode "MyString"
-# end
+Fabricator(:alert) do
+  active true
+  phone "5555555555"
+  zipcode "11111"
+  air_index_id 6
+end

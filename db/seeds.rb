@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-["Good", "Moderate", "Unhealthy for Sensitive Groups", "Unhealthy", "Very Unhealthy", "Hazardous", "Invalid AQI"].each do |rating|
+["Good", "Moderate", "Unhealthy For Sensitive Groups", "Unhealthy", "Very Unhealthy", "Hazardous", "Invalid AQI"].each do |rating|
   AirIndex.create(index: rating)
 end

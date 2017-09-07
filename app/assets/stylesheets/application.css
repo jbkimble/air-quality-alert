@@ -20,11 +20,29 @@
      background-color: #F1EFE9;
  }
 
+ #delete-form {
+     display: inline-block;
+ }
+
 .underline {
   text-decoration: underline;
   font-size: 1.5em;
   padding-left: 2px;
   padding-right: 2px;
+}
+
+.backgroundColorFlash{
+    background-color: #A3CCFF !important;
+    background-image:none !important;
+    -webkit-transition: background-color 5000ms linear;
+    -moz-transition: background-color 5000ms linear;
+    -o-transition: background-color 5000ms linear;
+    -ms-transition: background-color 5000ms linear;
+    transition: background-color 5000ms linear;
+    -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
+    animation-direction: alternate;
+    -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
+    animation-iteration-count: 2;
 }
 
 .results-box {
@@ -42,6 +60,26 @@
   border-left: 4px solid #265DE0;
   border-right: 4px solid #265DE0;
   text-align: center;
+  transition: background-color 0.5s ease;
+ }
+
+#your-alerts {
+  background-color: white;
+  height: 90.1%;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height:80%;
+  left:0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-radius: 10px 10px 0px 0px;
+  border-top: 6px solid #265DE0;
+  border-left: 4px solid #265DE0;
+  border-right: 4px solid #265DE0;
+  text-align: center;
+  transition: background-color 0.5s ease;
  }
 
  .result-text {
@@ -52,16 +90,6 @@
   text-align:center;
  }
 
- /*.close {
-   height: 50%;
-   width: 100%;
-   position:absolute;
-   top: 0;
-   left: 0;
-   z-index: 0;
-   frameborder:0;
- }*/
-
 .top-bar{
   background: #265DE0;
   position: absolute;
@@ -71,6 +99,54 @@
   width: 100%;
   min-height: 102px;
   height: 9.9%;
+}
+
+#logo {
+  font-family: AvenirNext-DemiBold;
+  font-size: .5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin:0px;
+  margin-top: 20px;
+  padding-left:37px;
+}
+
+#header-question {
+  font-family: Shrikhand-Regular;
+  font-size: 2.5em;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-top: 0px;
+  line-height: 90%;
+  padding-left:35px;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+#cancel-button {
+  margin-top: 0px;
+  line-height: 90%;
+  text-decoration: none;
+  margin-right: 35px;
+  padding: 10px 10px 10px 10px;
+  background-color: white;
+  color: #265de0;
+  font-family: AvenirNext-Medium;
+  font-size: 1.1em;
+  border-radius: 19px;
+  cursor:pointer;
+  -webkit-transition: margin-right 1s;
+  margin-top: .2%;
+  display: inline-block;
+  float: right;
+}
+
+#cancel-button:active {
+    background-color: #D8D8D8;
 }
 
 #zipcode-form {
@@ -87,7 +163,6 @@
   caret-color: #265de0;
   caret-width: 20px;
   -webkit-transition: width 1s;
-
 }
 
 #zipcode-input {
@@ -102,6 +177,33 @@
   -webkit-transition: margin-left 1s;
 }
 
+#find-phone-input {
+  width: 100%;
+  height: 70px;
+  background-color: #D8D8D8;
+  border: 7px solid #265DE0;
+  border-radius: 61px;
+  text-align: center;
+  font-family: AvenirNext-DemiBold;
+  letter-spacing: 1px;
+  -webkit-transition: margin-left 1s;
+}
+
+#phone-form {
+  position: relative;
+  z-index: 4;
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  text-align: center;
+  opacity: .9;
+  caret-color: #265de0;
+  caret-width: 20px;
+  -webkit-transition: width 1s;
+}
+
+
 #submit-button {
   margin-top: 5%;
   padding: 10px 10px 10px 10px;
@@ -113,7 +215,6 @@
   border-radius: 19px;
   cursor:pointer;
   -webkit-transition: margin-right 1s;
-  /*overflow-x: visible;*/
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -158,33 +259,29 @@ input:focus {
   transition: height 1s;
 }
 
-#header-question {
-  font-family: Shrikhand-Regular;
-  font-size: 2.5em;
-  color: #FFFFFF;
-  letter-spacing: 2px;
-  display: inline-block;
-  margin-top: 0px;
-  line-height: 90%;
-  padding-left:35px;
-}
-
-#logo {
-  font-family: AvenirNext-DemiBold;
-  font-size: .5em;
-  color: #FFFFFF;
-  letter-spacing: 2px;
-  margin:0px;
-  margin-top: 20px;
-  padding-left:37px;
-}
-
-#emoji-mage {
+#emoji-image {
   float: left;
-  width: 15%;
+  width: 22%;
   margin-left: 7%;
-  padding-top: 11%;
   margin-bottom: auto;
+}
+
+#result-text {
+  margin-top: 10%;
+  font-size: 1.5em;
+  font-family: AvenirNext-Medium;
+  color: #265de0;
+}
+
+.font-style {
+  font-family: AvenirNext-Medium;
+  color: #265de0;
+}
+
+.mild-emphasis{
+  font-family: AvenirNext-Bold;
+  color: #265de0;
+  font-size: 1.3em;
 }
 
 .text-emphasis{
@@ -194,12 +291,6 @@ input:focus {
   font-size: 1.5em;
 }
 
-#result-text {
-  font-size: 1em;
-  font-family: AvenirNext-Medium;
-  color: #265de0;
-}
-
 #call-box {
   height: 15%;
   min-height: 102px;
@@ -207,7 +298,6 @@ input:focus {
   position: fixed;
   bottom: 0;
   width: 100%;
-  /*overflow: scroll;*/
 }
 
 #sales-copy {
@@ -215,6 +305,10 @@ input:focus {
   font-size: 1em;
   color: #D8D8D8;
   letter-spacing: 0;
+}
+
+.margin-bottom-10 {
+  margin-bottom:10px;
 }
 
 #call-to-action {
@@ -247,19 +341,8 @@ input:focus {
   text-align: center;
 }
 
-#helpful-flash {
-  margin-top: -2%;
-  /*background-color: #9efffd;*/
-  background-color: white;
-  z-index:1;
-  height:50%;
-  width:100%;
-  text-align: center;
-}
-
-#helpful-phone-flash {
-  margin-top: -2%;
-  /*background-color: #9efffd;*/
+.flash-message {
+  margin-top: 3%;
   background-color: white;
   z-index:1;
   height:50%;
@@ -268,12 +351,6 @@ input:focus {
 }
 
 #flash-text {
-  line-height:50px;
-  font-family: AvenirNext-Bold;
-  color: #265DE0;
-}
-
-#phone-flash-text {
   line-height:50px;
   font-family: AvenirNext-Bold;
   color: #265DE0;
@@ -290,11 +367,10 @@ button {
   border-radius: 19px;
   cursor:pointer;
   -webkit-transition: margin-right 1s;
-  /*overflow-x: visible;*/
 }
 
 button:active {
-  background-color: blue;
+  background-color: #D8D8D8;
 }
 
 select {
@@ -312,17 +388,4 @@ select {
   padding: 20px;
   z-index: 1;
   position: relative;
-}
-
-#cancel-service {
-  margin-top: 5%;
-  padding: 10px 10px 10px 10px;
-  background-color: #265de0;
-  border: none;
-  color: white;
-  font-family: AvenirNext-Medium;
-  font-size: 1.5em;
-  border-radius: 19px;
-  cursor:pointer;
-  -webkit-transition: margin-right 1s;
 }

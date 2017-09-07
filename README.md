@@ -1,9 +1,7 @@
-![Air-Quality-Alert.net Demo Gif](https://github.com/jbkimble/photo_repo/blob/master/air-quality-alert_demo.gif "Air-Quality-Alert.net Demo Gif")
-
-
-
-# The Air-Quality-Alert Story
+# The [Air-Quality-Alert.net](air-quality-alert.net "Air-Quality-Alert.net Homepage") Story
 Air-Quality-Alert is a website where visitors can go to check the Air Quality of different locations around the world.  Visitors can also sign up to receive text or email alerts when the Air Quality in their area reaches the Moderate, Unhealthy For Sensitive Groups, Unhealthy, Very Unhealthy, or Hazardous designations set by the EPA.
+
+![Air-Quality-Alert.net Demo Gif](https://github.com/jbkimble/photo_repo/blob/master/air-quality-alert_demo.gif "Air-Quality-Alert.net Demo Gif")
 
 This project was inspired by the recent forest fires in the British Columbia region of Canada which caused smokey and smoggy conditions throughout the Pacific NW.  These conditions persisted for more than a week impacting both healthy individuals and sensitive groups.  It took several days of smokey and hazy conditions before the true cause, and appropriate response for these conditions was disseminated throughout the population.  
 

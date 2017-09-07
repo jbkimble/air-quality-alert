@@ -40,11 +40,9 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 
 ##### Run Tests
 
-unfortunately some test broke near end of development, still trouble shooting why these tests are not passing.
-
 `$ rspec`
 
-`#start server`
+##### Start server
 
 `$ rails s`
 

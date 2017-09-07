@@ -1,4 +1,5 @@
-[![Air-quality-alert.net Demo Video](https://img.youtube.com/vi/Zn7YMt9Xea0/0.jpg)](https://www.youtube.com/watch?v=Zn7YMt9Xea0&feature=youtu.be)
+![Air-Quality-Alert.net Demo Gif](https://github.com/jbkimble/photo_repo/blob/master/air-quality-alert_demo.gif "Air-Quality-Alert.net Demo Gif")
+
 
 
 # The Air-Quality-Alert Story

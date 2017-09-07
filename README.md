@@ -1,4 +1,5 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Zn7YMt9Xea0" frameborder="0" allowfullscreen></iframe>
+[![Air-quality-alert.net Demo Video](https://img.youtube.com/vi/Zn7YMt9Xea0/0.jpg)](https://www.youtube.com/watch?v=Zn7YMt9Xea0&feature=youtu.be)
+
 
 # The Air-Quality-Alert Story
 Air-Quality-Alert is a website where visitors can go to check the Air Quality of different locations around the world.  Visitors can also sign up to receive text or email alerts when the Air Quality in their area reaches the Moderate, Unhealthy For Sensitive Groups, Unhealthy, Very Unhealthy, or Hazardous designations set by the EPA.

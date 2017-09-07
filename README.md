@@ -22,13 +22,12 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 <img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="300" />
 
 # How To Run
-* ``` $ git clone https://github.com/jbkimble/air-quality-alert.git
-$ cd air-quality-alert
-$ bundle install
-  #create the database
-$ rake db:create
-$ rake db:migrate
-$ rake db:seed
-  #Run Tests
-$ rspec
-```
+`$ git clone https://github.com/jbkimble/air-quality-alert.git`
+`$ cd air-quality-alert`
+`$ bundle install`
+ ` #create the database`
+`$ rake db:create`
+`$ rake db:migrate`
+`$ rake db:seed`
+  `#Run Tests`
+`$ rspec`

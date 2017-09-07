@@ -15,11 +15,15 @@ Ruby on Rails, Twilio for SMS, Vanilla JS, and T.D.D. with RSpec/Capybara
 # Process
 I used an agile, test-driven, approach to development while developing this application.  This process sped up development, allowed me to confirm functions of the application performed as expected, and allowed me to develop from a users perspective.
 
-Below are the mockups I made in Sketch before beginning development, I think I delivered a very close match to what I initially envisioned.
+Below are the mockups I made in Sketch before beginning development, I think I delivered a close match to what I initially envisioned.
 
 <img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_homepage.png" height="300" />
 
 <img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="300" />
+
+# What I learned
+
+coming soon!
 
 # How To Run
 ##### Download application from github

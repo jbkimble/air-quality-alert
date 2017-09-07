@@ -22,7 +22,7 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 <img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="300" />
 
 # How To Run
-`#download application from github`
+##### Download application from github
 
 `$ git clone https://github.com/jbkimble/air-quality-alert.git`
 
@@ -30,7 +30,7 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 
 `$ bundle install`
 
-` #create, migrate, and seed the database`
+##### create, migrate, and seed the database
 
 `$ rake db:create`
 
@@ -38,9 +38,9 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 
 `$ rake db:seed`
 
-`#Run Tests`
+##### Run Tests
 
-`#unfortunately some test broke near end of development, still trouble shooting why these tests are not passing.`
+unfortunately some test broke near end of development, still trouble shooting why these tests are not passing.
 
 `$ rspec`
 
@@ -48,5 +48,5 @@ Below are the mockups I made in Sketch before beginning development, I think I d
 
 `$ rails s`
 
-`#application will now be available at localhost:3000 or your default port`
+##### application will now be available at localhost:3000 or your default port
 

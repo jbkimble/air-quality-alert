@@ -2,6 +2,7 @@
 Air-Quality-Alert is a website where visitors can go to check the Air Quality of different locations around the world.  Visitors can also sign up to receive text or email alerts when the Air Quality in their area reaches the Good, Moderate, Unhealthy For Sensitive Groups, Unhealthy, Very Unhealthy, or Hazardous designations set by the EPA.
 
 ![Air-Quality-Alert.net Demo Gif](https://github.com/jbkimble/photo_repo/blob/master/air-quality-alert_demo.gif "Air-Quality-Alert.net Demo Gif")
+[Air-Quality-Alert.net HD Demo Video](https://www.youtube.com/watch?v=Zn7YMt9Xea0 "Air-Quality-Alert.net HD Demo Video")
 
 This project was inspired by the recent forest fires in the British Columbia region of Canada which caused smokey and smoggy conditions throughout the Pacific NW.  These conditions persisted for more than a week impacting both healthy individuals and sensitive groups.  It took several days of smokey and hazy conditions before the true cause, and appropriate response for these conditions, was disseminated throughout the population.  
 
@@ -11,10 +12,13 @@ During this time many people engaged in activities which put them at risk becaus
 Ruby on Rails, Twilio, Vanilla JS, and T.D.D. with RSpec/Capybara
 
 # Process
-Below are the original moc ups
-<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_homepage.png" height="200" />
+I used an agile, test-driven, approach to development while developing this application.  This process sped up development, allowed me to confirm functions of the application performed as expected, and allowed me to develop from a users perspective.
 
-<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="200" />
+Below are the mockups I made in Sketch before beginning development, I think I delivered a very close match to what I initially envisioned.
+
+<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_homepage.png" height="300" />
+
+<img src="https://raw.githubusercontent.com/jbkimble/photo_repo/master/air-quality-alert/AQA_results_page.png" height="300" />
 
 # How To Run
 * Coming soon: This section will be added when the app has more features ...

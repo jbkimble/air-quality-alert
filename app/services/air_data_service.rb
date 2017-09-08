@@ -12,9 +12,13 @@ class AirDataService
   end
 
   def use_primary_api(lat_lng)
-    uri = URI.parse("http://api.airvisual.com//v2/nearest_city?key=#{ENV["av_key"]}&lat=#{lat_lng[:lat]}&lon=#{lat_lng[:lng]}")
-    response = Net::HTTP.get(uri)
-    JSON.parse(response, symbolize_names: true)[:data]
+    begin
+      uri = URI.parse("http://api.airvisual.com//v2/nearest_city?key=#{ENV["av_key"]}&lat=#{lat_lng[:lat]}&lon=#{lat_lng[:lng]}")
+      response = Net::HTTP.get(uri)
+      JSON.parse(response, symbolize_names: true)[:data]
+    rescue
+      return {message: "no_nearest_city", error: "Server Error"}
+    end
   end
 
   def use_backup_api(latitude, longitude)

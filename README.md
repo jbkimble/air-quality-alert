@@ -13,7 +13,7 @@ During this time many people engaged in activities which put them at risk becaus
 Ruby on Rails, Javascript, JQuery, Twilio for SMS, and T.D.D. with RSpec/Capybara
 
 # Process
-I used an agile, test-driven, approach to development while developing this application.  This process sped up development, allowed me to confirm functions of the application performed as expected, and allowed me to develop from a users perspective.
+I used an agile, test-driven, approach to development while working on this application.  This process sped up development, allowed me to confirm functions of the application performed as expected, and allowed me to develop from a users perspective.
 
 Below are the mockups I made in Sketch before beginning development, I think I delivered a close match to what I initially envisioned.
 

@@ -11,8 +11,6 @@ class AlertService
     todays_rating_by_zip.each do |zipcode, aqi|
       alerts_for_zipcode = Alert.where(zipcode: zipcode, active: true)
       alerts_for_zipcode.each do |alert|
-        # check to see if it is above the bottom range of the index they wanted to be notified at
-        # and send alert if that is the case
         if alert.air_index.bottom_range <= aqi
           TwilioService.send_alert(alert.phone, alert.zipcode, alert.air_index.index)
         end

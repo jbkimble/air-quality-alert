@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822180303) do
+ActiveRecord::Schema.define(version: 20170918174906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "air_indices", force: :cascade do |t|
     t.string   "index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "bottom_range"
+    t.integer  "top_range"
   end
 
   create_table "alerts", force: :cascade do |t|
